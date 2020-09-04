@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.RestController;
 public interface UserApi {
 
     @GetMapping("lingmeng-user-service/user/query")
-    public RestReturn queryUser(@RequestParam String userName, @RequestParam String password);
+    RestReturn queryUser(@RequestParam String userName, @RequestParam String password);
 }

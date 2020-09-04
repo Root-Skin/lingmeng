@@ -1,4 +1,5 @@
-package com.lingmeng.configuration;
+package com.lingmeng.config;
+
 
 import com.lingmeng.utils.RsaUtils;
 import lombok.Data;
@@ -8,8 +9,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.io.File;
-import java.security.PrivateKey;
 import java.security.PublicKey;
 
 
@@ -25,18 +24,13 @@ public class JwtProperties {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtProperties.class);
 
-    private String secret;
     private String pubKeyPath;
-    private String priKeyPath;
-    private int expire;
 
     //扩展字段
     private PublicKey publicKey;
-    private PrivateKey privateKey;
 
     //cookie扩展
     private String cookieName;
-    private int cookieMaxAge;
 
     /**
      * @Author skin
@@ -45,18 +39,13 @@ public class JwtProperties {
      **/
     @PostConstruct
     public void init() {
-        File publicKey = new File("pubKeyPath");
-        File privateKey = new File("priKeyPath");
-        if (!publicKey.exists() && !privateKey.exists()) {
-            try {
-                RsaUtils.generateKey(pubKeyPath, priKeyPath, secret);
-                this.publicKey = RsaUtils.getPublicKey(pubKeyPath);
-                this.privateKey = RsaUtils.getPrivateKey(priKeyPath);
-            } catch (Exception e) {
-                logger.error("初始化公钥和密钥失败", e);
-                throw new RuntimeException();
-            }
+        try {
+            this.publicKey = RsaUtils.getPublicKey(pubKeyPath);
+        } catch (Exception e) {
+            logger.error("初始化公钥失败", e);
+            throw new RuntimeException();
         }
+
     }
 
 }

@@ -21,9 +21,10 @@ zuul:
   sensitive-headers: #将敏感头设置为null
   #下面添加路由规则
   routes:
-    lingmeng-goods-service: /goods/**
-    lingmeng-auth-service-improve: /auth/**
-    lingmeng-user-service: /user/**
+    lingmeng-goods-service: /goods/**       #商品服务
+    lingmeng-auth-service-improve: /auth/** #认证服务
+    lingmeng-user-service: /user/**         #用户服务
+    lingmeng-sms-service: /sms/**           #发送邮箱服务
 
 ribbon:
   ConnectTimeout: 250 # 连接超时时间(ms)
@@ -38,6 +39,12 @@ hystrix:
         isolation:
           thread:
             timeoutInMillisecond: 10000 # 熔断超时时长：10000ms
-
+jwt:
+  pubKeyPath: D:\\tem_key\\rsa.pub
+  cookieName: LM_TOKEN
+filter:
+  allowPaths:
+    - /api/auth   #目前知识在白名单中配置一个路由
+    - /api/user/register  #用户注册放行,不拦截
 
 

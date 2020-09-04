@@ -10,8 +10,8 @@
         <module>lingmeng-common</module>
         <module>lingmeng-framework</module>
         <module>lingmeng-auth</module>
-        <module>com-lingmeng-user</module>
         <module>lingmeng-user</module>
+        <module>lingmeng-sms-service</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -35,12 +35,12 @@
         <lombok.version>1.18.12</lombok.version>
         <collection.version>4.1</collection.version>
         <jsql.version>3.1</jsql.version>
+        <mq.version>2.3.1.RELEASE</mq.version>
+        <sms.version>4.5.3</sms.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-
-
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -107,6 +107,16 @@
                 <artifactId>jsqlparser</artifactId>
                 <version>${jsql.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-amqp</artifactId>
+                <version>${mq.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>aliyun-java-sdk-core</artifactId>
+            </dependency>
+
         </dependencies>
 
     </dependencyManagement>
@@ -114,8 +124,6 @@
     <dependencies>
 
     </dependencies>
-
-
 
     <build>
         <plugins>

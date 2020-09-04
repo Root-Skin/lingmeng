@@ -1,16 +1,8 @@
 server:
-  port: 8083
+  port: 8084
 spring:
   application:
-    name: lingmeng-user-service
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/lingmeng?serverTimezone=GMT%2B8
-    username: root
-    password: huangtao123456
-    hikari:
-      maximum-pool-size: 30 #最大连接数目
-      minimum-idle: 10  #最大空闲数目
+    name: lingmeng-sms-service
   mail:
     username: huangtaosta@163.com
     password: EFFNOBWEJEBQFVAU
@@ -22,10 +14,6 @@ spring:
     properties.mail.smtp.starttls.required: true
     properties.mail.smtp.ssl.enable: true
     default-encoding: utf-8
-mybatis:                #配置mybatis的映射包
-  type-aliases-package: com.lingmeng.user.pojo.*
-  configuration:
-    map-underscore-to-camel-case: true  #开启user_name 对应userName驼峰命名法
 eureka:
   client:
     service-url:
@@ -36,8 +24,6 @@ eureka:
     instance-id: ${spring.application.name}:${server.port}
     lease-renewal-interval-in-seconds: 2 #5s发送一次心跳
     lease-expiration-duration-in-seconds: 20 #10s不发送就过期
-ribbon:
-    listOfServers: http://localhost:8090
 logging:
   level:
     com.lingmeng.user.mapper: debug

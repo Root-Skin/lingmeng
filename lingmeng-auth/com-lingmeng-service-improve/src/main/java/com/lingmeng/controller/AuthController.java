@@ -9,14 +9,13 @@ import com.lingmeng.utils.CookieUtils;
 import com.lingmeng.utils.JwtUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @RestController
-@EnableConfigurationProperties(JwtProperties.class)
+
 public class AuthController {
 
     @Autowired
@@ -54,9 +53,13 @@ public class AuthController {
       * @Description 验证用户信息
       **/
      @GetMapping("/verify")
-    public RestReturn verifyUser(@CookieValue("LM_TOKEN") String token){
+    public RestReturn verifyUser(@CookieValue("LM_TOKEN") String token,HttpServletRequest request,HttpServletResponse response){
          try {
              UserInfo userInfo = JwtUtils.getInfoFromToken(token, prop.getPublicKey());
+
+             token = JwtUtils.generateToken(userInfo,prop.getPrivateKey(),prop.getExpire());
+
+             CookieUtils.setCookie(request,response,prop.getCookieName(),token,prop.getCookieMaxAge(),true);
              return RestReturn.ok(userInfo);
          } catch (Exception e) {
              e.printStackTrace();
