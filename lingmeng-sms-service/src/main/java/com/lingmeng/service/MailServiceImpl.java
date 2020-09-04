@@ -6,12 +6,11 @@ import com.lingmeng.utils.VerificationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
 
-@Service
+//@Service
 public class MailServiceImpl implements MailService {
 
     private String code;
