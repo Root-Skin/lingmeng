@@ -58,6 +58,13 @@ public class RestReturn extends HashMap<String, Object> {
         result.put("message", "操作失败");
         return result;
     }
+    public static RestReturn error(String message) {
+        RestReturn result = new RestReturn();
+        result.put("code", 30000);
+        result.put("data", null);
+        result.put("message", message);
+        return result;
+    }
     public static  RestReturn error(Object data, String message) {
         RestReturn result = new RestReturn();
         result.put("code", 30000);

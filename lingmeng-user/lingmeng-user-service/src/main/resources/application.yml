@@ -22,6 +22,12 @@ spring:
     properties.mail.smtp.starttls.required: true
     properties.mail.smtp.ssl.enable: true
     default-encoding: utf-8
+  rabbitmq: #配置mq
+    username: /lingmeng
+    password: 123456
+    host: 192.168.189.128
+  redis:
+    host: 192.168.189.128
 mybatis:                #配置mybatis的映射包
   type-aliases-package: com.lingmeng.user.pojo.*
   configuration:

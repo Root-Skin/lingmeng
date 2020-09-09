@@ -1,5 +1,10 @@
 package com.lingmeng.util;
 
+ /**
+  * @Author skin
+  * @Date  2020/9/9
+  * @Description 获取用户工具类
+  **/
 public class UserUtil {
 
      /**
@@ -41,7 +46,8 @@ public class UserUtil {
       * @Date  2020/8/28
       * @Description 获取当前登陆人ID
       **/
-//     public static String getUserId(){
+     //todo 留给将来扩充
+//     public static String getUserId() {
 //
 //     }
 }

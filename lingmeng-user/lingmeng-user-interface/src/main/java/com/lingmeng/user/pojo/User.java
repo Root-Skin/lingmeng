@@ -10,9 +10,12 @@ import javax.persistence.Table;
 @Data
 public class User  extends SuperEntity {
     /** 用户名 */
+
     private String userName ;
     /** 密码 */
     private String password ;
     /** 电话号码 */
     private String phone ;
+    /** email */
+    private String email ;
 }

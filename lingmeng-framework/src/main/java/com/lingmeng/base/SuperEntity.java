@@ -1,5 +1,6 @@
 package com.lingmeng.base;
 
+import com.lingmeng.base.lingmengPlug.AutoId;
 import lombok.Data;
 
 import java.util.Date;
@@ -8,6 +9,7 @@ import java.util.Date;
 public class SuperEntity {
 
     /**主键 */
+    @AutoId
     private String id ;
     /** 创建人 */
     private String createdBy ;
@@ -17,5 +19,7 @@ public class SuperEntity {
     private String updatedBy ;
     /** 更新时间 */
     private Date updatedTime ;
+    /** 刪除 标识位*/
+    private boolean delFlag ;
 
 }
