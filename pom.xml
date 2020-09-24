@@ -6,12 +6,13 @@
     <modules>
         <module>lingmeng-registry</module>
         <module>lingmeng-api-gateway</module>
-        <module>lingmeng-goods</module>
         <module>lingmeng-common</module>
         <module>lingmeng-framework</module>
-        <module>lingmeng-auth</module>
-        <module>lingmeng-user</module>
-        <module>lingmeng-sms-service</module>
+        <module>lingmeng-api</module>
+        <module>lingmeng-model</module>
+        <module>lingmeng-service</module>
+        <module>lingmeng-dao</module>
+        <module>lingmeng-manager-web</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -28,7 +29,7 @@
     <properties>
         <java.version>1.8</java.version>
         <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
-        <mybatis.starter.version>2.1.3</mybatis.starter.version>
+        <mybatis.starter.version>3.3.2</mybatis.starter.version>
         <mysql.version>8.0.11</mysql.version>
         <mapper.starter.version>2.0.2</mapper.starter.version>
         <pageHelper.starter.version>1.2.3</pageHelper.starter.version>
@@ -68,23 +69,14 @@
                 </exclusions>
             </dependency>
             <!--自导入-->
+
             <dependency>
-                <groupId>org.mybatis.spring.boot</groupId>
-                <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${mybatis.starter.version}</version>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>3.3.2</version>
             </dependency>
-            <!-- 通用Mapper启动器 -->
-            <dependency>
-                <groupId>tk.mybatis</groupId>
-                <artifactId>mapper-spring-boot-starter</artifactId>
-                <version>${mapper.starter.version}</version>
-            </dependency>
-            <!-- 分页助手启动器 -->
-            <dependency>
-                <groupId>com.github.pagehelper</groupId>
-                <artifactId>pagehelper-spring-boot-starter</artifactId>
-                <version>${pageHelper.starter.version}</version>
-            </dependency>
+
+
             <!-- mysql驱动 -->
             <dependency>
                 <groupId>mysql</groupId>
@@ -132,6 +124,32 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/webapp</directory>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+
+            <resource>
+                <directory>META-INF/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 
 </project>

@@ -10,6 +10,5 @@ import java.util.List;
 @Component
 @ConfigurationProperties(prefix = "filter")
 public class FilterProperties {
-
     private List<String> allowPaths;
 }

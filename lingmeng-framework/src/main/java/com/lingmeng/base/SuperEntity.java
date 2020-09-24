@@ -1,6 +1,7 @@
 package com.lingmeng.base;
 
-import com.lingmeng.base.lingmengPlug.AutoId;
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 import java.util.Date;
@@ -9,7 +10,7 @@ import java.util.Date;
 public class SuperEntity {
 
     /**主键 */
-    @AutoId
+    @TableId(type = IdType.ASSIGN_UUID)
     private String id ;
     /** 创建人 */
     private String createdBy ;
@@ -20,6 +21,6 @@ public class SuperEntity {
     /** 更新时间 */
     private Date updatedTime ;
     /** 刪除 标识位*/
-    private boolean delFlag ;
+    private Boolean delFlag  =false;
 
 }

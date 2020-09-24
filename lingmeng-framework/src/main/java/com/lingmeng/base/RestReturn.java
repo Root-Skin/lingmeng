@@ -22,7 +22,7 @@ public class RestReturn extends HashMap<String, Object> {
     }
     public static RestReturn ok(String message ) {
         RestReturn result = new RestReturn();
-        result.put("code", 30000);
+        result.put("code", 10000);
         result.put("message",message);
         result.put("data", null);
         return result;
@@ -34,7 +34,7 @@ public class RestReturn extends HashMap<String, Object> {
         result.put("data", data);
         return result;
     }
-    public static RestReturn ok(String message, Object data) {
+    public static RestReturn ok(Object data,String message) {
         RestReturn result = new RestReturn();
         result.put("code", 10000);
         result.put("message", message);
@@ -69,6 +69,13 @@ public class RestReturn extends HashMap<String, Object> {
         RestReturn result = new RestReturn();
         result.put("code", 30000);
         result.put("data", data);
+        result.put("message", message);
+        return result;
+    }
+    public static  RestReturn error(int code , String message) {
+        RestReturn result = new RestReturn();
+        result.put("code", code);
+        result.put("data", null);
         result.put("message", message);
         return result;
     }
