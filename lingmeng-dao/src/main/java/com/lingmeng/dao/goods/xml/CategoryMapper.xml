@@ -6,5 +6,13 @@
     <delete id="deleteByCateId">
        update  lm_category set del_flag = 1 WHERE id = #{cateId}
     </delete>
+    <select id="getBrandsNameByCateId" resultType="com.lingmeng.model.goods.vo.res.BrandRes">
+    SELECT
+        *
+    FROM
+        lm_brand
+        LEFT JOIN lm_category_brand ON lm_brand.id = lm_category_brand.brand_id
+         WHERE lm_category_brand.category_id = #{cateId}
+    </select>
 
 </mapper>

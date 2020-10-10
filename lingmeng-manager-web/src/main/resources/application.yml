@@ -3,6 +3,9 @@ server:
 spring:
   application:
     name: lingmeng-manager
+  servlet:
+    multipart:
+      max-file-size: 5MB  #限制上传文件大小
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/lingmeng?serverTimezone=GMT%2B8
@@ -53,6 +56,14 @@ eureka:
     lease-expiration-duration-in-seconds: 20 #10s不发送就过期
 ribbon:
     listOfServers: http://localhost:8090
+fdfs:
+  so-timeout: 1501
+  connect-timeout: 601
+  thumb-image: # 缩略图
+    width: 60
+    height: 60
+  tracker-list: # tracker地址
+    - 192.168.56.101:22122
 logging:
   level:
     com.lingmeng.dao: debug
