@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lingmeng.dao.goods.SpuMapper">
+
+    <select id="goodsList" resultType="com.lingmeng.model.goods.vo.res.SpuListRes">
+         SELECT
+        s1.id,
+        s1.title,
+        CONCAT( s2.category_name, "/", s3.category_name ) AS categoryName,
+        s4.brand_name as brandName
+    FROM
+        lm_spu s1
+        LEFT JOIN lm_category s2 ON s1.cid1 = s2.id
+        LEFT JOIN lm_category s3 ON s1.cid2 = s3.id
+        LEFT JOIN lm_brand s4 ON s1.brand_id = s4.id
+        WHERE 1=1
+        <if test="req.shelfFlag!=null">
+            and  s1.shelf_flag=#{req.shelfFlag}
+        </if>
+        <if test="req.keyWords!=null and req.keyWords!=''">
+            and s4.brand_name like  CONCAT('%',#{req.keyWords},'%')
+        </if>
+
+    </select>
+    <select id="getCount" resultType="java.lang.Long">
+        SELECT count(*) FROM    lm_spu s1
+        LEFT JOIN lm_category s2 ON s1.cid1 = s2.id
+        LEFT JOIN lm_category s3 ON s1.cid2 = s3.id
+        LEFT JOIN lm_brand s4 ON s1.brand_id = s4.id
+        WHERE 1=1
+        <if test="req.shelfFlag!=null ">
+            and  s1.shelf_flag=#{req.shelfFlag}
+        </if>
+
+        <if test="req.keyWords!=null and req.keyWords!=''">
+            and s4.brand_name like  CONCAT('%',#{req.keyWords},'%')
+        </if>
+
+    </select>
+</mapper>
