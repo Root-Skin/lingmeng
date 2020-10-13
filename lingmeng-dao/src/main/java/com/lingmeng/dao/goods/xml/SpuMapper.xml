@@ -1,39 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lingmeng.dao.goods.BrandMapper">
-    <insert id="insertIntoCateAndBrand">
-        INSERT INTO lm_category_brand (category_id, brand_id) VALUES (#{cateId},#{brandId})
-    </insert>
-    <delete id="deleteByBrandId">
-        DELETE FROM lm_category_brand WHERE  brand_id =#{brandId}
-    </delete>
-    <select id="getBrandList" resultType="com.lingmeng.model.goods.vo.res.BrandRes">
-        SELECT id,brand_name,brand_pic,brand_letter FROM lm_brand
+<mapper namespace="com.lingmeng.dao.goods.SpuMapper">
+
+    <select id="goodsList" resultType="com.lingmeng.model.goods.vo.res.SpuListRes">
+         SELECT
+        s1.id,
+        s1.title,
+        s1.cid1,
+        s1.cid2,
+        CONCAT( s2.category_name, "/", s3.category_name ) AS categoryName,
+        s4.brand_name as brandName
+    FROM
+        lm_spu s1
+        LEFT JOIN lm_category s2 ON s1.cid1 = s2.id
+        LEFT JOIN lm_category s3 ON s1.cid2 = s3.id
+        LEFT JOIN lm_brand s4 ON s1.brand_id = s4.id
+        WHERE 1=1
+        <if test="req.shelfFlag!=null">
+            and  s1.shelf_flag=#{req.shelfFlag}
+        </if>
         <if test="req.keyWords!=null and req.keyWords!=''">
-            WHERE brand_name like  CONCAT('%',#{req.keyWords},'%')
+            and s4.brand_name like  CONCAT('%',#{req.keyWords},'%')
         </if>
-        <if test="req.sortBy!=null and req.sortBy!=''">
-            order by ${req.sortBy}
-        </if>
-        <if test = "req.desc != null">
-            <choose>
-                <when test = "req.desc == true">
-                    desc
-                </when>
-                <when test = "req.desc == false">
-                    asc
-                </when>
-                <otherwise></otherwise>
-            </choose>
-        </if>
+
     </select>
     <select id="getCount" resultType="java.lang.Long">
-         SELECT count(*) FROM lm_brand
-        <if test="req.keyWords!=null and req.keyWords!=''">
-            WHERE brand_name like  CONCAT('%',#{req.keyWords},'%')
+        SELECT count(*) FROM    lm_spu s1
+        LEFT JOIN lm_category s2 ON s1.cid1 = s2.id
+        LEFT JOIN lm_category s3 ON s1.cid2 = s3.id
+        LEFT JOIN lm_brand s4 ON s1.brand_id = s4.id
+        WHERE 1=1
+        <if test="req.shelfFlag!=null ">
+            and  s1.shelf_flag=#{req.shelfFlag}
         </if>
+
+        <if test="req.keyWords!=null and req.keyWords!=''">
+            and s4.brand_name like  CONCAT('%',#{req.keyWords},'%')
+        </if>
+
     </select>
-    <select id="selectCategoryByBrandId" resultType="com.lingmeng.model.goods.model.Category">
-        SELECT  id,category_name FROM lm_category WHERE id in (SELECT category_id from lm_category_brand WHERE brand_id = #{brandId})
+    <select id="getRelateInfoBySpuId" resultType="java.util.Map">
+
+
     </select>
 </mapper>

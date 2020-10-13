@@ -1,11 +1,13 @@
 package com.lingmeng.dao.goods;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.lingmeng.model.goods.model.Spu;
+import com.lingmeng.model.goods.model.Sku;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 
-public interface SpuMapper extends BaseMapper<Spu> {
+public interface SkuMapper extends BaseMapper<Sku> {
 
-
-
+    List<Sku> getRelateInfoBySpuId(@Param("spuId") String SpuId);
 }

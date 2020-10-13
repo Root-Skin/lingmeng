@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lingmeng.dao.goods.SpuDetailMapper">
+<mapper namespace="com.lingmeng.dao.goods.SkuStockMapper">
 
+    <select id="selectBySkuId" resultType="com.lingmeng.model.goods.model.SkuStock">
+
+        SELECT
+            *
+        FROM
+            lm_sku_stock
+        WHERE
+        sku_id = #{skuId}
+    </select>
 </mapper>

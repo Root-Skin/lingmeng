@@ -16,10 +16,10 @@ public class Spu extends SuperEntity {
     private String cid1 ;
     /** 二级类目ID */
     private String cid2 ;
-    /** 三级类目ID */
-    private String cid3 ;
     /** 关联品牌ID */
     private String brandId ;
     /** 是否上架 */
     private Boolean shelfFlag ;
+
+    private Boolean valid;// 是否有效，逻辑删除用
 }

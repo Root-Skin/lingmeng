@@ -1,11 +1,12 @@
 package com.lingmeng.dao.goods;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.lingmeng.model.goods.model.SpuDetail;
+import com.lingmeng.model.goods.model.SkuStock;
+import org.apache.ibatis.annotations.Param;
 
 
-public interface SpuDetailMapper extends BaseMapper<SpuDetail> {
+public interface SkuStockMapper extends BaseMapper<SkuStock> {
 
 
-
+    SkuStock selectBySkuId(@Param("skuId") String skuId);
 }

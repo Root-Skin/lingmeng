@@ -3,15 +3,22 @@ package com.lingmeng.model.goods.vo.res;
 import lombok.Data;
 
 @Data
-public class BrandRes {
-    /** 品牌名字 */
+public class SpuListRes {
+
     private String id ;
-    /** 品牌名字 */
-    private String brandName ;
-    /** 品牌图片 */
-    private String brandPic ;
-    /** 品牌首字母 */
-    private String brandLetter ;
+    /** 标题 */
+    private String title ;
+    /** 分类名 */
+    private String categoryName ;
+    /** 品牌名 */
+    private String brandName;
+
+    //这里缺少的cid,导致后面回显出现问题
+
+    /** 品牌名 */
+    private String cid1;
+    /** 品牌名 */
+    private String cid2;
 
 
 }

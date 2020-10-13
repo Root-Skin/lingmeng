@@ -1,21 +1,24 @@
 package com.lingmeng.model.goods.vo.req;
 
-import com.lingmeng.model.goods.model.Sku;
-import com.lingmeng.model.goods.model.Spu;
-import com.lingmeng.model.goods.model.SpuDetail;
 import lombok.Data;
 
-import java.util.List;
+import javax.validation.constraints.NotNull;
 
 @Data
-public class AddGoodReq extends Spu {
+public class GoodListReq  {
 
 
-    String cname;// 商品分类名称
 
-    String bname;// 品牌名称
+    /** 页码 */
+    @NotNull(message = "页码不能为空")
+    private Long pageNo ;
+    /** 每页数量 */
+    @NotNull(message = "每页大小不能为空")
+    private Long pageSize ;
 
-    SpuDetail spuDetail;// 商品详情
 
-    List<Sku> skus;// sku列表
+    /** 关键字 */
+    private String   keyWords ;
+
+    private Boolean  shelfFlag;
 }
