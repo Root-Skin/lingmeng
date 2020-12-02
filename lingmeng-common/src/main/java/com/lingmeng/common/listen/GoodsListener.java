@@ -72,6 +72,9 @@ public class GoodsListener {
 
         //定义一个变量模拟冲突
         int i = 0;
+        //
+        //开发中
+        //继续开发
 
         //老三加入了开发
 
