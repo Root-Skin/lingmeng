@@ -21,8 +21,7 @@ public class GoodsListener {
 
     @Autowired
     private ISearchService searchService;
-
-     //开发人员2的新增
+    
     /**
      * 处理insert和update的消息
      *
@@ -44,10 +43,7 @@ public class GoodsListener {
         // 创建或更新索引
         this.searchService.createIndex(id);
     }
-    //开发人员1的代码
-     //再次新增
-         //开发人员 2  11:19
-     //开发人员 2  11:19
+
     /**
      * 处理delete的消息
      *
@@ -66,11 +62,7 @@ public class GoodsListener {
         }
         // 删除索引
         this.searchService.deleteIndex(id);
-        //开发环境代码
-        //开发人员2的开发
 
-
-        //开发人员1 11:12
     }
 
 }
