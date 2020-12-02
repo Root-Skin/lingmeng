@@ -70,8 +70,8 @@ public class GoodsListener {
         //添加新的数据
         //黄涛新增的数据2(这里有错误和黄翔进行了修改)-->最后===
 
-        //定义我的语言
-        //ahdoaishdoiahsdoihaosidhoih
+        //定义一个变量模拟冲突
+        int i = 0;
 
         //老三加入了开发
 
