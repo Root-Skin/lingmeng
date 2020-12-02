@@ -49,7 +49,6 @@ public class GoodsListener {
      *
      * @param id
      */
-    //黄涛的监听器对象
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue(value = "lingmeng.delete.index.queue", durable = "true"),
             exchange = @Exchange(
@@ -63,29 +62,6 @@ public class GoodsListener {
         }
         // 删除索引
         this.searchService.deleteIndex(id);
-        //黄翔的新增1
-        //黄翔的修改2
-
-        //黄涛删除的数据1(这里有错误和黄翔进行了修改)-->最后哇哈哈==
-        //添加新的数据
-        //黄涛新增的数据2(这里有错误和黄翔进行了修改)-->最后===
-
-        //定义一个变量模拟冲突
-        int i = 0;
-        //tutuutu
-        //解决冲突后继续开发
-        //diidididididididi
-        //dadadad
-        //abdcdefg
-        //...
-
-        //老三加入了开发
-
-
-        //老四加入了开发
-
-        //老三的代码
-        //这里是老五的代码...
     }
 
 }
