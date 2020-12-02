@@ -64,6 +64,8 @@ public class GoodsListener {
         this.searchService.deleteIndex(id);
 
         //测试分支处理BUg添加的代码
+
+        //uat演示环境出现BUG
     }
 
 }
