@@ -47,6 +47,7 @@ public class GoodsListener {
     //开发人员1的代码
      //再次新增
      //开发人员1 11:12
+     //开发人员 2  11:19
     /**
      * 处理delete的消息
      *
