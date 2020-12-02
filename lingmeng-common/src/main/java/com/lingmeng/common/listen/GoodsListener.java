@@ -62,7 +62,8 @@ public class GoodsListener {
         }
         // 删除索引
         this.searchService.deleteIndex(id);
-
+        //黄涛新增的数据1
+        //黄涛新增的数据2
     }
 
 }
