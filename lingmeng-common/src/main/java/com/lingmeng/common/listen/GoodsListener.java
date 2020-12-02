@@ -43,6 +43,7 @@ public class GoodsListener {
         this.searchService.createIndex(id);
     }
     //开发人员1的代码
+     //再次新增
     /**
      * 处理delete的消息
      *
