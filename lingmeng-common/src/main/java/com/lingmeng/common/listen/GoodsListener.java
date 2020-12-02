@@ -62,6 +62,8 @@ public class GoodsListener {
         }
         // 删除索引
         this.searchService.deleteIndex(id);
+        //黄翔的新增1
+        //黄翔的修改2
 
     }
 
