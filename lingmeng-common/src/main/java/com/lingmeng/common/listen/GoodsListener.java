@@ -61,6 +61,7 @@ public class GoodsListener {
         }
         // 删除索引
         this.searchService.deleteIndex(id);
+        //开发人员2的开发
     }
 
 }
