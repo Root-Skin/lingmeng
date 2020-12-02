@@ -49,6 +49,7 @@ public class GoodsListener {
      *
      * @param id
      */
+    //黄涛的监听器对象
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue(value = "lingmeng.delete.index.queue", durable = "true"),
             exchange = @Exchange(
