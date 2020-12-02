@@ -3,5 +3,7 @@
 <mapper namespace="com.lingmeng.dao.goods.SpecificationMapper">
 
 
-
+    <select id="getSpecificationByCateId" resultType="com.lingmeng.goods.model.Specification">
+        SELECT * from lm_specification WHERE category_id =#{cateId}
+    </select>
 </mapper>

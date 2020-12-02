@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: api-gateway
+  redis:
+    host: 192.168.189.131
 eureka:
   client:
     service-url:
@@ -18,7 +20,7 @@ zuul:
   prefix: /api #前缀
   retryable: true #网关重试开关
   add-host-header: true
-  sensitive-headers: #将敏感头设置为null
+  sensitive-headers:       #将敏感头设置为null
   #下面添加路由规则
   routes:
 #    lingmeng-goods-service: /goods/**       #商品服务
@@ -48,7 +50,7 @@ hystrix:
             timeoutInMillisecond: 10000 # 熔断超时时长：10000ms
 filter:
   allowPaths:
-    - /api/auth   #目前知识在白名单中配置一个路由
+    - /api/auth           #目前知识在白名单中配置一个路由
     - /api/user/register  #用户注册放行,不拦截
     - /api/user/sendEmailCode #发送email不拦截
     - /api/goods             #商品不拦截

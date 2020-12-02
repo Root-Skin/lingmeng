@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lingmeng.dao.goods.SkuMapper">
 
-    <select id="getRelateInfoBySpuId" resultType="com.lingmeng.model.goods.model.Sku">
+    <select id="getRelateInfoBySpuId" resultType="com.lingmeng.goods.model.Sku">
     SELECT
         *
     FROM

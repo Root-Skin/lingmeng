@@ -1,7 +1,7 @@
 package com.lingmeng.dao.goods;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.lingmeng.model.goods.model.SkuStock;
+import com.lingmeng.goods.model.SkuStock;
 import org.apache.ibatis.annotations.Param;
 
 

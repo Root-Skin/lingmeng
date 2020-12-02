@@ -1,7 +1,7 @@
 package com.lingmeng.api.good;
 
-import com.lingmeng.model.goods.vo.req.SpecificationReq;
-import com.lingmeng.model.goods.vo.res.AccurateSpecificationRes;
+import com.lingmeng.goods.vo.req.SpecificationReq;
+import com.lingmeng.goods.vo.res.AccurateSpecificationRes;
 
 import java.util.List;
 

@@ -6,8 +6,8 @@ import com.lingmeng.api.good.IcategoryService;
 import com.lingmeng.base.RestReturn;
 import com.lingmeng.dao.goods.CategoryMapper;
 import com.lingmeng.exception.RestException;
-import com.lingmeng.model.goods.model.Category;
-import com.lingmeng.model.goods.vo.req.CategoryReq;
+import com.lingmeng.goods.model.Category;
+import com.lingmeng.goods.vo.req.CategoryReq;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -85,4 +85,32 @@ public class CategoryController {
           categoryMapper.updateById(category);
           return RestReturn.ok("编辑成功");
       }
+
+
+
+    /**
+     * 根据商品分类id查询名称
+     * @param ids 要查询的分类id集合
+     * @return 多个名称的集合
+     */
+    @GetMapping("names")
+    public RestReturn queryNameByIds(@RequestParam("ids") List<String> ids){
+
+        List<Category> list = this.categoryMapper.queryNameByIds(ids);
+        if (list == null || list.size() < 1) {
+            return  RestReturn.error("未找到该ID集合下对应的名称");
+        }
+        return RestReturn.ok(list);
+    }
+
+     /**
+      * @Author skin
+      * @Date  2020/11/5
+      * @Description 根据二级分类的接口查询一级和二级分类的名称
+      **/
+    @GetMapping("getAllCategoryName")
+    public RestReturn getAllCategoryNameBySecondCateId(@RequestParam String secondCategoryId){
+        List<Category> relateCategoryList = this.categoryService.getAllCategoryNameBySecondCateId(secondCategoryId);
+        return RestReturn.ok(relateCategoryList);
+    }
 }

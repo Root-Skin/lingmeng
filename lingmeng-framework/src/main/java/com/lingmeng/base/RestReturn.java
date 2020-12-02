@@ -1,5 +1,7 @@
 package com.lingmeng.base;
 
+import com.lingmeng.exception.RestException;
+
 import java.util.HashMap;
 
 public class RestReturn extends HashMap<String, Object> {
@@ -8,6 +10,12 @@ public class RestReturn extends HashMap<String, Object> {
     private Object message;
 
     public RestReturn() {
+    }
+
+    public RestReturn(RestException excption) {
+        this.code = excption.getCode();
+        this.data = excption.getInfo();
+        this.message = excption.getMessage();
     }
 
     public RestReturn(Boolean success, Integer code, Object data, Object message) {
@@ -27,6 +35,7 @@ public class RestReturn extends HashMap<String, Object> {
         result.put("data", null);
         return result;
     }
+
     public static RestReturn ok(Object data) {
         RestReturn result = new RestReturn();
         result.put("code", 10000);
@@ -39,6 +48,13 @@ public class RestReturn extends HashMap<String, Object> {
         result.put("code", 10000);
         result.put("message", message);
         result.put("data", data);
+        return result;
+    }
+    public static RestReturn ok(int code,Object data,String message) {
+        RestReturn result = new RestReturn();
+        result.put("code", code);
+        result.put("data", data);
+        result.put("message", message);
         return result;
     }
 
@@ -79,4 +95,7 @@ public class RestReturn extends HashMap<String, Object> {
         result.put("message", message);
         return result;
     }
+
+
+
 }

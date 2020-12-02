@@ -2,7 +2,7 @@ package com.lingmeng.api.user;
 
 
 import com.lingmeng.base.RestReturn;
-import com.lingmeng.model.user.vo.req.UserReq;
+import com.lingmeng.user.vo.req.UserReq;
 
 
 public interface UserService {

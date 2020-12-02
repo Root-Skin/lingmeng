@@ -7,14 +7,13 @@ import com.lingmeng.api.good.IbrandService;
 import com.lingmeng.base.RestReturn;
 import com.lingmeng.dao.goods.BrandMapper;
 import com.lingmeng.exception.RestException;
-import com.lingmeng.model.goods.model.Brand;
-import com.lingmeng.model.goods.model.Category;
-import com.lingmeng.model.goods.vo.req.BrandListReq;
-import com.lingmeng.model.goods.vo.req.BrandReq;
-import com.lingmeng.model.goods.vo.res.BrandRes;
+import com.lingmeng.goods.model.Brand;
+import com.lingmeng.goods.model.Category;
+import com.lingmeng.goods.vo.req.BrandListReq;
+import com.lingmeng.goods.vo.req.BrandReq;
+import com.lingmeng.goods.vo.res.BrandRes;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +22,6 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@Component
 @RequestMapping("/brand")
 public class BrandController {
 
@@ -121,6 +119,21 @@ public class BrandController {
         //如果直接删除掉的话,数据全部被删除,逻辑删除
         brandMapper.deleteById(id);
         return RestReturn.ok("删除成功");
+    }
+
+     /**
+      * @Author skin
+      * @Date  2020/10/26
+      * @Description 批量查询品牌接口
+      **/
+    @GetMapping("list")
+    public RestReturn queryNameByIds(@RequestParam("ids") List<String> ids){
+
+        List<Brand > list = this.brandMapper.queryNameByIds(ids);
+        if (list == null || list.size() < 1) {
+            return  RestReturn.error("未找到该ID集合下对应的名称");
+        }
+        return RestReturn.ok(list);
     }
 
 

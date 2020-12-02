@@ -8,7 +8,7 @@ import com.lingmeng.base.RestReturn;
 import com.lingmeng.common.config.JwtProperties;
 import com.lingmeng.common.utils.auth.JwtUtils;
 import com.lingmeng.common.utils.auth.UserInfo;
-import com.lingmeng.model.user.model.User;
+import com.lingmeng.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

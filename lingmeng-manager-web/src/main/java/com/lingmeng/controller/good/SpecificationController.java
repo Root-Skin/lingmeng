@@ -9,10 +9,10 @@ import com.lingmeng.api.good.IspecificationService;
 import com.lingmeng.base.RestReturn;
 import com.lingmeng.dao.goods.SpecificationMapper;
 import com.lingmeng.exception.RestException;
-import com.lingmeng.model.goods.model.Specification;
-import com.lingmeng.model.goods.vo.req.*;
-import com.lingmeng.model.goods.vo.res.AccurateSpecificationRes;
-import com.lingmeng.model.goods.vo.res.SpecificationRes;
+import com.lingmeng.goods.model.Specification;
+import com.lingmeng.goods.vo.req.*;
+import com.lingmeng.goods.vo.res.AccurateSpecificationRes;
+import com.lingmeng.goods.vo.res.SpecificationRes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -139,13 +139,18 @@ public class SpecificationController {
      **/
     @PostMapping("/addSpecification")
     public RestReturn addSpecification(@RequestParam String groupId, @RequestParam String groupName, @RequestBody SpecificationaddReq req) {
+        //找到对应分组下的规格
+        System.out.println(groupName);
         Specification specification = specificationMapper.selectOne(new QueryWrapper<Specification>().eq("category_id", groupId));
+
         //判断是否在该分组下存在 规格
         List<AccurateSpecificationRes> specifications = specificationService.getSpecification(groupId, groupName);
+        //当前分组groupName下不存在对应分组信息,新建添加新的分组
         if (StringUtils.isEmpty(specifications) && StringUtils.isEmpty(specification)) {
             Specification newSpecification = new Specification();
             Map map = new HashMap();
             List list = new ArrayList<>();
+
             list.add(req);
             map.put("group", groupName);
             map.put("param", list);
@@ -153,9 +158,10 @@ public class SpecificationController {
             newSpecification.setSpecifications(JSONObject.toJSONString(map));
             specificationMapper.insert(newSpecification);
         } else {
+            //groupName存在对应的分组
             List<String> strings = JSONObject.parseArray(specification.getSpecifications(), String.class);
+            List list = new ArrayList();
             for (String s : strings) {
-                List list = new ArrayList();
                 Map map = JSONObject.parseObject(s, Map.class);
                 if (map.get("group").equals(groupName)) {
                     List<SpecificationaddReq> param = new ArrayList<>();
@@ -164,11 +170,11 @@ public class SpecificationController {
                     }
                     param.add(req);
                     map.put("param", param);
-                    list.add(map);
                 }
-                //设置最新的param
-                specification.setSpecifications(JSONObject.toJSONString(list));
+                list.add(map);
             }
+            //修改了其中的元素导致下次遍历出现问题
+            specification.setSpecifications(JSONObject.toJSONString(list));
             specificationMapper.update(specification, new QueryWrapper<Specification>().eq("category_id", groupId));
         }
         return RestReturn.ok("新增成功");
@@ -202,8 +208,8 @@ public class SpecificationController {
                         param.setIsNum(req.getIsNum());
                         param.setIsSearch(req.getIsSearch());
                         param.setUnit(req.getUnit());
-                        param.setSearchMax(req.getSearchMax());
-                        param.setSearchMin(req.getSearchMin());
+                        param.setOptions(req.getOptions());
+
                     }
                     paramList.add(param);
                     //原有数据被覆盖

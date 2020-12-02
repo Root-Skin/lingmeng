@@ -2,7 +2,7 @@ package com.lingmeng.controller.user;
 
 import com.lingmeng.base.RestReturn;
 import com.lingmeng.api.user.UserService;
-import com.lingmeng.model.user.vo.req.UserReq;
+import com.lingmeng.user.vo.req.UserReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

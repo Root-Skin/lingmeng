@@ -6,7 +6,7 @@
     <delete id="deleteByCateId">
        update  lm_category set del_flag = 1 WHERE id = #{cateId}
     </delete>
-    <select id="getBrandsNameByCateId" resultType="com.lingmeng.model.goods.vo.res.BrandRes">
+    <select id="getBrandsNameByCateId" resultType="com.lingmeng.goods.vo.res.BrandRes">
     SELECT
         *
     FROM
@@ -14,5 +14,16 @@
         LEFT JOIN lm_category_brand ON lm_brand.id = lm_category_brand.brand_id
          WHERE lm_category_brand.category_id = #{cateId}
     </select>
+    <select id="queryNameByIds" resultType="com.lingmeng.goods.model.Category">
+        SELECT * FROM lm_category
+         WHERE id in
+        <foreach collection="ids" index="index" item="item"
+                 open="(" separator="," close=")">
+            #{item}
+        </foreach>
+
+
+    </select>
+
 
 </mapper>

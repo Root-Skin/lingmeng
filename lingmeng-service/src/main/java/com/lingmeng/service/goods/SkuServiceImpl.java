@@ -3,7 +3,7 @@ package com.lingmeng.service.goods;
 
 import com.lingmeng.api.good.IskuService;
 import com.lingmeng.dao.goods.SkuMapper;
-import com.lingmeng.model.goods.model.Sku;
+import com.lingmeng.goods.model.Sku;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

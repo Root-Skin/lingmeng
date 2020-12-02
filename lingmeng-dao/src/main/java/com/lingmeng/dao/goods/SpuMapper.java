@@ -2,9 +2,9 @@ package com.lingmeng.dao.goods;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.lingmeng.model.goods.model.Spu;
-import com.lingmeng.model.goods.vo.req.GoodListReq;
-import com.lingmeng.model.goods.vo.res.SpuListRes;
+import com.lingmeng.goods.model.Spu;
+import com.lingmeng.goods.vo.req.GoodListReq;
+import com.lingmeng.goods.vo.res.SpuListRes;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -19,4 +19,6 @@ public interface SpuMapper extends BaseMapper<Spu> {
     Long getCount(@Param("req") GoodListReq req);
 
     Map getRelateInfoBySpuId(@Param("spuId") String spuId);
+
+
 }

@@ -1,7 +1,7 @@
 package com.lingmeng.api.good;
 
 
-import com.lingmeng.model.goods.model.Sku;
+import com.lingmeng.goods.model.Sku;
 
 import java.util.List;
 

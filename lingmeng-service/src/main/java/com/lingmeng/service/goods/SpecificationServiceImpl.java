@@ -6,9 +6,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.lingmeng.api.good.IspecificationService;
 import com.lingmeng.dao.goods.SpecificationMapper;
-import com.lingmeng.model.goods.model.Specification;
-import com.lingmeng.model.goods.vo.req.SpecificationReq;
-import com.lingmeng.model.goods.vo.res.AccurateSpecificationRes;
+import com.lingmeng.goods.model.Specification;
+import com.lingmeng.goods.vo.req.SpecificationReq;
+import com.lingmeng.goods.vo.res.AccurateSpecificationRes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -55,6 +55,9 @@ public class SpecificationServiceImpl implements IspecificationService {
     @Override
     public List<AccurateSpecificationRes> getSpecification(String cateId, String groupName) {
         Specification specification = specificationMapper.selectOne(new QueryWrapper<Specification>().eq("category_id", cateId));
+        if(StringUtils.isEmpty(specification)){
+            return null;
+        }
         List<String> strings = JSONObject.parseArray(specification.getSpecifications(), String.class);
         if(CollectionUtils.isEmpty(strings)){
             return null;

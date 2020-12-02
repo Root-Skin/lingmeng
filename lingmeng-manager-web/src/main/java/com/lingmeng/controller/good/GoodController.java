@@ -9,13 +9,18 @@ import com.lingmeng.dao.goods.SkuStockMapper;
 import com.lingmeng.dao.goods.SpuDetailMapper;
 import com.lingmeng.dao.goods.SpuMapper;
 import com.lingmeng.exception.RestException;
-import com.lingmeng.model.goods.model.Sku;
-import com.lingmeng.model.goods.model.Spu;
-import com.lingmeng.model.goods.model.SpuDetail;
-import com.lingmeng.model.goods.vo.req.AddGoodReq;
-import com.lingmeng.model.goods.vo.req.GoodListReq;
-import com.lingmeng.model.goods.vo.res.BrandRes;
-import com.lingmeng.model.goods.vo.res.SpuListRes;
+import com.lingmeng.goods.model.Sku;
+import com.lingmeng.goods.model.SkuStock;
+import com.lingmeng.goods.model.Spu;
+import com.lingmeng.goods.model.SpuDetail;
+import com.lingmeng.goods.vo.req.AddGoodReq;
+import com.lingmeng.goods.vo.req.GoodListReq;
+import com.lingmeng.goods.vo.res.BrandRes;
+import com.lingmeng.goods.vo.res.SpuListRes;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.amqp.AmqpException;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
@@ -29,6 +34,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/good")
 public class GoodController {
+    private static final Logger logger = LoggerFactory.getLogger(GoodController.class);
 
     @Autowired
     private CategoryMapper categoryMapper;
@@ -49,6 +55,9 @@ public class GoodController {
 
     @Autowired
     private SkuStockMapper skuStockMapper;
+
+    @Autowired
+    private AmqpTemplate amqpTemplate;
 
 
     /**
@@ -72,11 +81,22 @@ public class GoodController {
      **/
     @PostMapping("/addNewGood")
     public RestReturn addNewGood(@RequestBody AddGoodReq req) {
-        Boolean result = spuService.addNewGood(req);
-        if (result) {
-            return RestReturn.ok("保存成功");
+        if(StringUtils.isEmpty(req.getId())){
+            Boolean result = spuService.addNewGood(req);
+            if (result) {
+                return RestReturn.ok("保存成功");
+            }
+            return RestReturn.error("保存失败");
+        }else{
+            Boolean result = spuService.editGood(req);
+            if (result) {
+                return RestReturn.ok("编辑成功");
+            }
+            return RestReturn.error("编辑失败");
         }
-        return RestReturn.error("保存失败");
+        //如果id不为null-->编辑状态
+
+
     }
 
     /**
@@ -125,8 +145,9 @@ public class GoodController {
         SpuDetail relateDetail = spuDetailMapper.getRelateInfoBySpuId(spuId);
         List<Sku> relateSku = skuService.getRelateInfoBySpuId(spuId);
         for (Sku sku : relateSku) {
-            Integer stock = skuStockMapper.selectBySkuId(sku.getId()).getStock();
-            sku.setStock(stock);
+            SkuStock skuStock = skuStockMapper.selectBySkuId(sku.getId());
+            sku.setStock(skuStock.getStock());
+            sku.setSkuStockId(skuStock.getId());
         }
         result.put("spu", spu);
         result.put("spuDetail", relateDetail);
@@ -147,8 +168,23 @@ public class GoodController {
         }
         spu.setDelFlag(true);
         spuMapper.updateById(spu);
+        try {
+            amqpTemplate.convertAndSend("lingmeng.good.exchange", "good.delete",spuId);
+        } catch (AmqpException e) {
+            logger.error("{}商品消息发送异常，商品id：{}", "delete", spuId, e);
+        }
         return RestReturn.ok("删除成功");
     }
 
+     /**
+      * @Author skin
+      * @Date  2020/11/9
+      * @Description 组装商品详情页的数据
+      **/
+     @GetMapping("/GoodDetail")
+     public RestReturn getGoodDetail(@RequestParam String spuId) {
+         Map goodDetail = this.spuService.getGoodDetail(spuId);
+         return RestReturn.ok(goodDetail);
+     }
 
 }

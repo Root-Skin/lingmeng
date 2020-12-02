@@ -4,8 +4,8 @@ package com.lingmeng.service.goods;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.lingmeng.api.good.IbrandService;
 import com.lingmeng.dao.goods.BrandMapper;
-import com.lingmeng.model.goods.vo.req.BrandListReq;
-import com.lingmeng.model.goods.vo.res.BrandRes;
+import com.lingmeng.goods.vo.req.BrandListReq;
+import com.lingmeng.goods.vo.res.BrandRes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

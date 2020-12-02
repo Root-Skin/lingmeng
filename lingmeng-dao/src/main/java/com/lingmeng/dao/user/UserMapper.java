@@ -2,7 +2,7 @@ package com.lingmeng.dao.user;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.lingmeng.model.user.model.User;
+import com.lingmeng.user.model.User;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 

@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lingmeng.dao.goods.SpuDetailMapper">
+	<update id="updateBySpuId">
 
-    <select id="getRelateInfoBySpuId" resultType="com.lingmeng.model.goods.model.SpuDetail">
+	</update>
+
+	<select id="getRelateInfoBySpuId" resultType="com.lingmeng.goods.model.SpuDetail">
         SELECT
+        s1.id,
 	s1.description,
 	s1.specifications,
 	s1.unique_specification,
