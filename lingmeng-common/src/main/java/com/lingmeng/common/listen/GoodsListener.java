@@ -21,7 +21,7 @@ public class GoodsListener {
 
     @Autowired
     private ISearchService searchService;
-    
+
     /**
      * 处理insert和update的消息
      *
