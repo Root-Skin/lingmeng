@@ -30,9 +30,9 @@ spring:
   rabbitmq: #配置mq
     username: lingmeng
     password: lingmeng
-    host: 192.168.189.131
+    host: 192.168.189.134
   redis:
-    host: 192.168.189.131
+    host: 192.168.189.134
 mybatis-plus:                #配置mybatis的映射包
   mapper-locations: classpath*:com/lingmeng/dao/**/xml/*Mapper.xml
   typeAliasesPackage: com.lingmeng.model.*.model
@@ -65,7 +65,7 @@ fdfs:
     width: 60
     height: 60
   tracker-list: # tracker地址
-    - 192.168.189.131:22122
+    - 192.168.189.134:22122
 logging:
   level:
     com.lingmeng.dao: debug

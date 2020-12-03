@@ -11,7 +11,9 @@
 
     <groupId>com.lingmeng.api</groupId>
     <artifactId>lingmeng-api-gateway</artifactId>
-
+    <properties>
+        <docker.image.prefix>skin</docker.image.prefix>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -40,4 +42,41 @@
             <artifactId>jedis</artifactId>
         </dependency>
     </dependencies>
+    <build>
+        <defaultGoal>compile</defaultGoal>
+        <finalName>lingmeng-api-gateway</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.lingmeng.LingmengApiGateway</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.12</version>
+                <configuration>
+                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+                    <imageTags>
+                        <imageTag>${project.version}</imageTag>
+                    </imageTags>
+                    <!-- 指定Dockerfile所在的路径 -->
+                    <dockerHost>http://192.168.189.134:2375</dockerHost>
+                    <dockerDirectory>src/main/docker</dockerDirectory>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
 </project>
