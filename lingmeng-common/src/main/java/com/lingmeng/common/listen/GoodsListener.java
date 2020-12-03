@@ -64,7 +64,6 @@ public class GoodsListener {
         // 删除索引
         this.searchService.deleteIndex(id);
 
-        //测试分支处理BUg添加的代码
     }
 
 }
