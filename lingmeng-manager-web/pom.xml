@@ -174,7 +174,7 @@
             <artifactId>docker-maven-plugin</artifactId>
             <version>0.4.12</version>
             <configuration>
-                <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
+                <imageName>192.168.189.134:5000/${docker.image.prefix}/${project.artifactId}</imageName>
                 <imageTags>
                     <imageTag>${project.version}</imageTag>
                 </imageTags>
