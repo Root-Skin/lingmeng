@@ -153,13 +153,7 @@
             <resource>
                 <directory>src/main/webapp</directory>
             </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/*</include>
-                </includes>
-            </resource>
+
 
             <resource>
                 <directory>META-INF/resources</directory>
@@ -173,6 +167,22 @@
                 <includes>
                     <include>**/*.xml</include>
                 </includes>
+            </resource>
+            <!--先排除掉所有的application*.properties-->
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>application*.yml</exclude>
+                </excludes>
+            </resource>
+            <!--再将对应配置的properties包含在内-->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>application.yml</include>
+                    <include>application-${spring.active}.yml</include>
+                </includes>
+                <filtering>true</filtering>
             </resource>
         </resources>
     </build>
