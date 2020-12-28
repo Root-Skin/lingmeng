@@ -50,11 +50,8 @@ hystrix:
             timeoutInMillisecond: 10000 # 熔断超时时长：10000ms
 filter:
   allowPaths:
-    - /api/auth           #目前知识在白名单中配置一个路由
-    - /api/user/register  #用户注册放行,不拦截
-    - /api/user/sendEmailCode #发送email不拦截
-    - /api/goods             #商品不拦截
-    - /api/manager             #商品不拦截
+    - /api/manager             #不拦截
+
 
 
 

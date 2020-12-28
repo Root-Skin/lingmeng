@@ -31,6 +31,17 @@ spring:
     username: lingmeng
     password: lingmeng
     host: 192.168.189.134
+    port: 5672
+    cache:
+      channel:
+        size: 1000
+    listener:
+        simple:
+          acknowledge-mode: manual
+          retry:
+            max-attempts: 1
+            multiplier: 1
+            enabled: true
   redis:
     host: 192.168.189.134
 mybatis-plus:                #配置mybatis的映射包
@@ -69,3 +80,8 @@ fdfs:
 logging:
   level:
     com.lingmeng.dao: debug
+wx:
+  appId: wx35eeb7862fcd0a54
+  appSecret: ca40d44f6b298580cc1c23b862575b3f
+  mchId: 1509699451
+  key: saduashfdoiasfhoasihfoasihfoashf

@@ -5,11 +5,13 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.lingmeng.base.SuperEntity;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @TableName("lm_sku")
 @Data
-public class Sku   extends SuperEntity {
+public class Sku   extends SuperEntity  implements Serializable {
     /** 关联的spu的ID */
     private String spuId ;
     /** 标题 */
@@ -24,6 +26,13 @@ public class Sku   extends SuperEntity {
     private String ownSpec ;
     /** 是否有效 */
     private Boolean enable ;
+
+    /** 是否有效 */
+    private Boolean isMiaosha ;
+
+    private Date activeStartTime;
+
+    private Date activeEndTime;
 
 
     /** 库存数 */

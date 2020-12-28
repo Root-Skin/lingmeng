@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lingmeng.dao.goods.SkuMapper">
 
+
     <select id="getRelateInfoBySpuId" resultType="com.lingmeng.goods.model.Sku">
     SELECT
         *
@@ -9,5 +10,29 @@
         lm_sku
     WHERE
     spu_id = #{spuId}
+    </select>
+    <select id="selectByMiaoshaTime" resultType="com.lingmeng.miaosha.vo.MiaoshaRedisDataVo">
+        SELECT
+        s1.id,
+        s1.title,
+        s1.images,
+        s1.price,
+        s1.active_start_time as activeStartTime,
+        s1.active_end_time as activeEndTime,
+        s2.stock,
+        s2.spike_total as spikeTotal
+        FROM
+        lm_sku s1
+        LEFT JOIN lm_sku_stock s2 ON s1.id = s2.sku_id
+        WHERE
+        s1.active_start_time >= #{startTime}
+        AND s1.active_end_time &lt; #{endTime}
+        AND s2.stock>0
+        <if test="keys != null and keys.size()>0">
+            AND s1.id  not in
+            <foreach collection="keys" item="item" open="(" close=")" separator=",">
+                #{item}
+            </foreach>
+        </if>
     </select>
 </mapper>

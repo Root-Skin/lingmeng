@@ -1,6 +1,8 @@
 package com.lingmeng.base;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
@@ -17,11 +19,13 @@ public class SuperEntity {
     private String createdBy ;
     /** 创建时间 */
     @JsonFormat(pattern="yyyy-MM-dd ", timezone="GMT+8")
+    @TableField(fill = FieldFill.INSERT)
     private Date createdTime ;
     /** 更新人 */
     private String updatedBy ;
     /** 更新时间 */
     @JsonFormat(pattern="yyyy-MM-dd ", timezone="GMT+8")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updatedTime ;
     /** 刪除 标识位*/
     private Boolean delFlag  =false;
