@@ -8,14 +8,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 //com.lingmeng.* 能够扫描到全局异常处理,不能解决跨域
 
 @SpringBootApplication
 @EnableDiscoveryClient
 @MapperScan("com.lingmeng.dao")
+@EnableAsync
 @ComponentScan(basePackages ={"com.lingmeng.api","com.lingmeng.dao","com.lingmeng.service",
-        "com.lingmeng.controller","com.lingmeng.common","com.lingmeng.*.*","com.lingmeng.exception"})
+        "com.lingmeng.controller","com.lingmeng.common","com.lingmeng.*.*","com.lingmeng.exception","com.lingmeng.task"})
 public class LingmengManagerApplication {
     public static void main(String[] args) {
         SpringApplication.run(LingmengManagerApplication.class,args);
