@@ -28,7 +28,7 @@ public class PayController {
     /**
      * @Author skin
      * @Date 2020/12/21
-     * @Description 创建二维码
+     * @Description 创建二维码(秒杀相关,和)
      **/
     @GetMapping("/CreateQR")
     public RestReturn CreateQR() {

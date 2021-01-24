@@ -3,6 +3,8 @@ package com.lingmeng.common.listen;
 
 import com.alibaba.fastjson.JSON;
 import com.lingmeng.common.config.MqConf;
+import com.lingmeng.common.config.NormalOrderMqConf;
+import com.lingmeng.common.utils.aliPay.AliPayHelper;
 import com.lingmeng.dao.goods.SkuMapper;
 import com.lingmeng.goods.model.Sku;
 import com.lingmeng.miaosha.model.MiaoshaOrder;
@@ -28,6 +30,9 @@ public class OrderDelayListener {
 
     @Autowired
     private SkuMapper skuMapper;
+
+    @Autowired
+    private AliPayHelper aliPayHelper;
 
 //    @RabbitHandler
 //    @RabbitListener(queues = MqConf.LINGMENG_QUEUE)
@@ -55,6 +60,27 @@ public class OrderDelayListener {
         channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
         log.info("死信开始消费结束");
     }
+
+    @RabbitHandler
+    @RabbitListener(queues = NormalOrderMqConf.NORMAL_LINGMENG_DEAD_QUEUE)
+    void normalOrderMqDeadReceive(Message message, com.rabbitmq.client.Channel channel) throws IOException {
+        log.info("普通订单 死信队列开始消费");
+        log.info("接收端接收时间{}:", LocalDateTime.now().toString());
+        String orderId = new String(message.getBody());
+
+        //处理订单状态
+
+        try {
+            aliPayHelper.timeoutToCloseOrder(orderId);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //如果不进行ack,查看是否进入死信
+        channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+        log.info("死信开始消费结束");
+    }
+
+
 
     public void rollbackOrder(MiaoshaQueueVo miaoshaQueueVo){
         String userName = miaoshaQueueVo.getUserName();

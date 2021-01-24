@@ -1,39 +1,28 @@
 package com.lingmeng.common.config;
 
-import com.alibaba.fastjson.parser.ParserConfig;
-import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
-
-@Configuration
+@Data
+@Component
+@ConfigurationProperties(prefix = "redis")
 public class RedisConfig {
-    @Bean
-    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+    private String host = "192.168.189.134";
+    private int port = 6379;
+    private String password ;
+    private int timeout = 2000;
+    private int database = 0;
+    private RedisConfig.Pool pool = new Pool();
 
 
-        redisTemplate.setConnectionFactory(redisConnectionFactory);
 
-        FastJsonRedisSerializer<Object> fastJsonRedisSerializer = new FastJsonRedisSerializer<>(Object.class);
-        // 全局开启AutoType，不建议使用
-        // ParserConfig.getGlobalInstance().setAutoTypeSupport(true);
-        // 建议使用这种方式，小范围指定白名单
-        ParserConfig.getGlobalInstance().addAccept("com.lingmeng.");
-
-        // 设置值（value）的序列化采用FastJsonRedisSerializer。
-        redisTemplate.setValueSerializer(fastJsonRedisSerializer);
-        redisTemplate.setHashValueSerializer(fastJsonRedisSerializer);
-        // 设置键（key）的序列化采用StringRedisSerializer。
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setHashKeySerializer(new StringRedisSerializer());
-
-        redisTemplate.afterPropertiesSet();
-        return redisTemplate;
-
+    @Data
+    public static class Pool {
+        private int maxActive = 200;
+        private int maxWait = -1;
+        private int maxIdle = 8;
+        private int minIdle = 0;
     }
 
 }

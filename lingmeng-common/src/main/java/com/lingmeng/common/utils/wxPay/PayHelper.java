@@ -17,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 
 @Component
 public class PayHelper {
+
     private WXPay wxPay;
 
     private static final Logger logger = LoggerFactory.getLogger(PayHelper.class);

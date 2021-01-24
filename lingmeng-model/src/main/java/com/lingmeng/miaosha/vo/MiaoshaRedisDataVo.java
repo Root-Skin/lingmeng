@@ -21,6 +21,8 @@ public class MiaoshaRedisDataVo implements Serializable {
     private String activeStartTime;
     private String activeEndTime;
     private Integer stock;
-    private Integer spikeTotal;
+    private  Integer spikeTotal;
+
+
 
 }

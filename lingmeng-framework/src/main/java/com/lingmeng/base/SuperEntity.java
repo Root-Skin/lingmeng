@@ -4,13 +4,15 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class SuperEntity {
+public class SuperEntity<T extends Model> extends Model{
 
     /**主键 */
     @TableId(type = IdType.ASSIGN_UUID)
@@ -29,5 +31,13 @@ public class SuperEntity {
     private Date updatedTime ;
     /** 刪除 标识位*/
     private Boolean delFlag  =false;
+
+
+
+    //返回当前类的主键
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 
 }

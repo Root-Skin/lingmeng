@@ -43,6 +43,8 @@ import java.util.*;
 
 @Service
 public class EsSearchServiceImpl implements ISearchService {
+
+
     private static final Logger logger = LoggerFactory.getLogger(EsSearchServiceImpl.class);
 
     @Autowired

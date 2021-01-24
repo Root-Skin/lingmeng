@@ -25,7 +25,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     private static final ThreadLocal<UserInfo> tl = new ThreadLocal<>();
 
 
-    //todo 理解这里的构造方法
+    //这里的jwt是从拦截器配置哪里传递过来的
     public LoginInterceptor(JwtProperties jwtProperties) {
         this.jwtProperties = jwtProperties;
     }

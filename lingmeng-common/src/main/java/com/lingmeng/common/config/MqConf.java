@@ -20,6 +20,11 @@ public class MqConf {
     public static final String LINGMENG_DEAD_QUEUE = "lingmeng_order_dead_queue";
     public static final String LINGMENG_DEAD_ROUTE_KEY = "lingmeng_dead_route_key";
 
+
+
+    public static final String NORMAL_LINGMENG_DEAD_ROUTE_KEY = "normal_lingmeng_dead_route_key";
+    public static final String NORMAL_LINGMENG_DEAD_QUEUE = "normal_lingmeng_order_dead_queue";
+
     // 定义交换机
     @Bean
     public FanoutExchange bussinessExchange() {
@@ -46,6 +51,8 @@ public class MqConf {
        return new Queue(LINGMENG_DEAD_QUEUE);
     }
 
+
+
     //将业务队列和业务交换机进行绑定
     @Bean public Binding businessBinding(@Qualifier("bussinessQueue") Queue queue,
                                           @Qualifier("bussinessExchange") FanoutExchange exchange) {
@@ -56,5 +63,6 @@ public class MqConf {
                                           @Qualifier("deadLetterExchange") DirectExchange exchange) {
         return BindingBuilder.bind(queue).to(exchange).with(LINGMENG_DEAD_ROUTE_KEY);
     }
+
 
 }

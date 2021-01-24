@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lingmeng.dao.task.TaskMapper">
+
+
+    <update id="createTable">
+    CREATE TABLE lingmeng_test(
+    id VARCHAR(32) NOT NULL   COMMENT '主键' ,
+    test VARCHAR(32)    COMMENT '测试' ,
+    created_by VARCHAR(32)    COMMENT '创建人' ,
+    created_time DATETIME    COMMENT '创建时间' ,
+    updated_by VARCHAR(32)    COMMENT '更新人' ,
+    updated_time DATETIME    COMMENT '更新时间' ,
+    del_flag tinyint(1)    COMMENT '是否删除' ,
+    PRIMARY KEY (id)
+) COMMENT = ' ';;
+
+    </update>
+</mapper>

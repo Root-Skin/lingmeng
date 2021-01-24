@@ -29,4 +29,14 @@ public class MqServiceImpl implements MqService {
             log.error("订单延时队列消息异常", e);
         }
     }
+    /**
+     * @author skin
+     * @param orderId
+     * @Date  2021/1/15 15:23
+     * @description 普通订单,延时处理(5s检查状态)
+     **/
+    @Override
+    public void normalOrderDelayMessage(String orderId) {
+        amqpTemplate.convertAndSend("normal_lingmeng_order_queue", orderId);
+    }
 }

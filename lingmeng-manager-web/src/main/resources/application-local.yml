@@ -43,7 +43,23 @@ spring:
             multiplier: 1
             enabled: true
   redis:
+    # Redis服务器地址
     host: 192.168.189.134
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password:
+    timeout: 2000
+    database: 0
+    pool:
+      # 连接池最大连接数（使用负值表示没有限制）
+      max-active: 400
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-wait: -1
+      # 连接池中的最大空闲连接
+      max-idle: 20
+      # 连接池中的最小空闲连接
+      min-idle: 0
 mybatis-plus:                #配置mybatis的映射包
   mapper-locations: classpath*:com/lingmeng/dao/**/xml/*Mapper.xml
   typeAliasesPackage: com.lingmeng.model.*.model
@@ -85,3 +101,29 @@ wx:
   appSecret: ca40d44f6b298580cc1c23b862575b3f
   mchId: 1509699451
   key: saduashfdoiasfhoasihfoasihfoashf
+alipay:
+  gateWay: openapi.alipaydev.com
+  signType: RSA2
+  charset: utf-8
+  appId: 2021000116685367
+  privateKey: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDHuxY99sUN1po4SkKjyL7Qwv3h8bfeSMwyCVE9fNFpdqzRP0r+BXAeWf9aDQGyH3QYSWnrpy5Lv/HibYhLp4HFOcee/6pFPvTPbZk4sqwaHj7LbOmtmm3FhbWnPgp4f/Wi68wATORyLEcVO18tdEOoOzGTa+B3DySZJfwUXd/MwKY200KiMr9SPFvUF1pTpagqyIbUwKYcqy9pbf79D79b3CeoiLMaHVO1B0KAUNQfwa4tmJl+5wCMF9TRNUQn37je0O+FbdTkTQh/oYOCUMKRtavPacBLrUStDSvL67XabuzyCq9uHb7dq7nbfOgZPLHwoliNFgyVhTJblo4vbWk3AgMBAAECggEATtalb+4RWGYGWAPQDDB4SZU+e8pbBq37lCCjZb74NkX2712pb12cJQ7nQZdyvOm3fMK1waQrHRF2HCeaLiq/iadGCZfnkQ/JuHsNiRjV4DViGhAyqSkU/WvLCWnu3iO8RQQIcXHolrytjk7yQdHrxuMerY9eegCLNLyOpUdsyLfqzpyrRzQfSiYNGt4IIHi+MykIzOygTvQb1zwM/BRrawFf8Wlf3xSEtQy2d610o1zbvoVG8IrZ6lDhTwodMxqqIwWhnWxR/4baAOgybvWr4fd84j71TNVi5nqq68viSuZGHiboH+DQT0Ma1rBe9jj+b19/MAks72A1Emh/piNXEQKBgQD/WFuqTdeRy+3zdGLN+S/5HF33jXgXuvtjIg+cOSncrKhOmOT/taaY9XVbt315QgIEO/TGhsgD84HOHnYE7diGGZygPbbJH9XeXd+vxsvjJ12JOw09fwj3OnZUiQ8XlWIPS7Rxo9fxOu+2dX/ePQQX2O+4rQWyPtpB20oDIISWGQKBgQDIPjde+TW8f+PqCEC5sSFabTKtYe3d5nUYypdGnBokM6IPcRonOw4Uy+LlL/Zu5cT6GQ44s7jLwe8BRCAOrLbhQAQjtRswgMIpRfb0lfFdQbesNL9lesPpvJiMhZo5mYbkthdR3IL6g2tZkKXoVikE4wCM0fVd4sEaIzOYQ1vDzwKBgQCS1QZxGi4aAsCkPIsMknyJrUxDrDAgxT8FtHJxjVWLNiXafIVCnfxc/NktkogukEyEjs2k06B01TQRiOao0vStuFCevJ49bXcYVbbpZ1GbH+njnfdxI3nOYOnmlqH9F8O5s/jhWCw25YMu0sZiz4dpBzBia+xYoVf0gts+jRZxEQKBgQCbuC5tMBYG2dnOxM442bObU7IGPVKyrqY/OkT8BycZIgIUShtRiM5Bg/CV1H+q7AoLh/KUS8cYxV7tOCJJ5yxs7NCLSCq1xFu5pwwOVpCVuiZwx7BT5W13Vk+3b6powqixMZ3e7kH5OLwBscgjbuWFRFbIK/rJIS6T+e4EqdUx5wKBgCN6ekFbOAy1k+lxoWATnHVYn6mgZwDsOQbiqHF+anosUVtkpYZ5V+oE5Twz/93IsLmSup6TrnDB1scOf633uGwzJMkKa8AeMs+4N+2tFAQXE6wsDyqO9rfOI7hOLDs6tCnXGhk73ppOn68WCPrudo9hNa0FAzsOBRWHTgtEqgAD
+  alipayPublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArxvc5ws6+1WpcBkqOP8Fo7mYZLmwvZ15j50PoLaud8BpPJFspYGDsdqb1CN8uLkNeB3ncbjMqPzRgoLKp8xRZ9iRCoudT+FyXKU0p6L0Su5OAHwi6kXo3Jsa28+p+ketrshFAfqVLHX0suIiq1nPn8dAiyaK958geAMzlxRI8m2oKfnubzfjGmcMEXanajK0a2/7/2QS2CHK/Rf1FayHylENgZRkBEcjUfFGPoihJ5Im49D01ptvD33PqlIzRlLSw80YwjcgSI7s84noU4aDCP+wW/BSitLFuST4SXVG9TNTnIC83HqZtqXauPtPjXdz6QAwbEtGhkFSI9Xv1z+m0wIDAQAB
+  notifyUrl: http://4qm6uq.natappfree.cc/call
+  port: 8083
+crawler:
+    init:
+      url:
+        prefix: https://www.csdn.net/nav/
+        suffix: java,web,arch,db,mobile,ops,sec,cloud,engineering,iot,fund,career
+    help:
+      nextPagingSize: 5
+crux:
+  cookie:
+      name: acw_sc__v2
+proxy:
+  isUsedProxyIp: false
+#  ChromeDriver下载
+webdriver:
+  chrome:
+    driver: D:/myproject/weblogic/chromedriver.exe
+

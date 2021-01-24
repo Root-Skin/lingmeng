@@ -3,14 +3,15 @@ package com.lingmeng.config;
 
 import com.lingmeng.common.config.JwtProperties;
 import com.lingmeng.common.utils.auth.CookieUtils;
+import com.lingmeng.common.utils.auth.JwtUtils;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
-import com.lingmeng.common.utils.auth.JwtUtils;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
   * @Description zuul过滤器
   **/
 @Component
+@EnableConfigurationProperties(JwtProperties.class)
 public class LoginFilter extends ZuulFilter {
     private static  final Logger logger = LoggerFactory.getLogger(LoginFilter.class);
 
@@ -28,7 +30,7 @@ public class LoginFilter extends ZuulFilter {
     JwtProperties properties;
 
     @Autowired
-    FilterProperties filterProperties;
+    private FilterProperties filterProperties;
 
     @Override
     public String filterType() {

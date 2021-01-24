@@ -14,7 +14,7 @@ public class Order extends SuperEntity {
     private String userId ;
     /** 买家昵称 */
     private String userNickName ;
-    /** 订单状态;(1.未支付 ,2已支付) */
+    /** 订单状态;(1.未支付 ,2已支付 ,3已关闭) */
     private Integer status ;
     /** 总金额 */
     private BigDecimal totalPay ;
