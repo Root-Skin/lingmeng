@@ -31,6 +31,7 @@ public class DuplicateEncoder {
 //        }
 
 //        return result.toString();
+        String s ="ht";
         return "";
     }
 }
