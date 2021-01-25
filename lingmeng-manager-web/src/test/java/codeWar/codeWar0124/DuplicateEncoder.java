@@ -32,6 +32,7 @@ public class DuplicateEncoder {
 
 //        return result.toString();
        String s = "wahaha";
+       //黄涛开发1
         return "";
     }
 }
