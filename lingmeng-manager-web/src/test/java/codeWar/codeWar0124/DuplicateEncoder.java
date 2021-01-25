@@ -32,8 +32,9 @@ public class DuplicateEncoder {
 
 //        return result.toString();
        String s = "wahaha";
-       //黄涛开发1
-        //xx开发的
+       //黄涛woyaozhizhaochogntu开发1
+        //xx开发的()woyaozhi
+        // zhaochogntu
         // 开发2
         return "";
     }
