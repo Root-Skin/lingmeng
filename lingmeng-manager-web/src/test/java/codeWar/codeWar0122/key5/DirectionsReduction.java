@@ -35,23 +35,23 @@ public class DirectionsReduction {
         Map<String, Long> collect = Arrays.stream(arr)
                 .collect(Collectors.groupingBy(k -> k, Collectors.counting()));
 
-        if(collect.get("NORTH")>collect.get("SOUTH")){
+        if(collect.get("NORTH")!=0 && collect.get("SOUTH") !=0 && collect.get("NORTH")>collect.get("SOUTH")){
             count= collect.get("NORTH")-collect.get("SOUTH");
             for(int i=0;i<count;i++){
                 mylist.add("NORTH");
             }
-        }else if(collect.get("NORTH")<collect.get("SOUTH")){
+        }else if(collect.get("NORTH")!=0 && collect.get("SOUTH") !=0 && collect.get("NORTH")<collect.get("SOUTH")){
             count = collect.get("SOUTH")-collect.get("NORTH");
             for(int i=0;i<count;i++){
                 mylist.add("SOUTH");
             }
         }
-        if(collect.get("EAST")>collect.get("WEST")){
+        if(collect.get("EAST")!=0 && collect.get("WEST") !=0 && collect.get("EAST")>collect.get("WEST")){
             count= collect.get("EAST")-collect.get("WEST");
             for(int i=0;i<count;i++){
                 mylist.add("EAST");
             }
-        }else if(collect.get("EAST")<collect.get("WEST")){
+        }else if(collect.get("EAST")!=0 && collect.get("WEST") !=0 &&  collect.get("EAST")<collect.get("WEST")){
             count = collect.get("WEST")-collect.get("EAST");
             for(int i=0;i<count;i++){
                 mylist.add("WEST");
