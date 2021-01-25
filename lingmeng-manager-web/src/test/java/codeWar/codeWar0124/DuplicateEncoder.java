@@ -32,9 +32,11 @@ public class DuplicateEncoder {
 
 //        return result.toString();
        String s = "wahaha";
-       //黄涛开发1
+       //黄涛(unix)开发1
         //xx开发的
         // 开发2
+        //冲突2
+
         return "";
     }
 }
