@@ -33,8 +33,7 @@ public class DuplicateEncoder {
 //        return result.toString();
        String s = "wahaha";
        //黄涛开发1
-        //黄涛
-        //   过意制造冲突
+        //xx开发的
         // 开发2
         return "";
     }
