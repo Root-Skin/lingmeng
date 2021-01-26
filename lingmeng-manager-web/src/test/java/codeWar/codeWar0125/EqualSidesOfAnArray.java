@@ -17,8 +17,9 @@ public class EqualSidesOfAnArray {
     }
     public static int findEvenIndex(int[] arr) {
 
-        
 
+
+        return  0;
         // your code
     }
 }
