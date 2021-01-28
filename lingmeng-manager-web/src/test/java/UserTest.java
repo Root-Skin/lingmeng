@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.*;
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -79,5 +80,14 @@ public class UserTest {
             user.setPassword("abcdefg" + i);
             this.userMapper.insert(user);
         }
+    }
+
+    @Test
+    public void Bigdicimal() {
+//        BigDecimal bigDecimal1 = new BigDecimal(5.0);
+        BigDecimal bigDecimal2 = BigDecimal.ZERO;
+        int i = bigDecimal2.compareTo(BigDecimal.ZERO);
+        System.out.println(i);
+
     }
 }

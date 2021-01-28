@@ -126,4 +126,30 @@ proxy:
 webdriver:
   chrome:
     driver: D:/myproject/weblogic/chromedriver.exe
+#3D七牛上传
+qiniu:
+  realFaceAccessKey: 7A2Qq9xOwhztEqozbwfrOtzRGPy6NMtFX3B13HoO
+  realFaceSecretKey: p8L4QaGzH5KiIYBLhOfI4vK96eNdJXen_C7VSAKW
+  # 3D模型上传的空间
+  realFaceBucket: realmerit-model-resources
+  # 3D模型访问域名
+  realFaceDomain: models.release.neurongenius.com
+  # 3D模型生成下载链接的协议
+  realFaceProtocol: http
+
+  accessKey: naDNSb-_EB57vRk0_qdPTs1XShTGuzbW4S3ebQ02
+  secretKey: kEeSdeCDgxiYqhfFP5ZFhgdITc3A4zTuCShsH6Jk
+
+
+
+  # 附件上传的空间
+  bucket: neuron-3d
+  # app对应的3D模型上传的空间名称
+  appModelBucket: neuron-app3d
+  # app对应的3D模型访问域名
+  appModelDomain: cdn.3d.neurongenius.com
+  # 附件访问域名
+  domain: cdn.3d.neurongenius.com
+  # 附件生成下载链接的协议
+  protocol: http
 

@@ -47,7 +47,7 @@ public class AlipayControllerEnhance {
     @GetMapping("/aliPayEnhance/shoppingCartAliPay")
     @ResponseBody
     public RestReturn shoppingCartWeChatPay(@RequestParam String orderId) {
-        //调用微信支付返回 支付地址
+
         String paymentAddress = aliPayHelper.createPayUrl(orderId);
         if (StringUtils.isEmpty(paymentAddress)) {
             return RestReturn.ok("生成二维付款码链接地址失败");

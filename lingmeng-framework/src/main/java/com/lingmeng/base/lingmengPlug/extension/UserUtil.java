@@ -7,9 +7,6 @@ package com.lingmeng.base.lingmengPlug.extension;
   * @Description 获取用户工具类
   **/
 public class UserUtil {
-
-
-
      /**
       * @Author skin
       * @Date  2020/8/28

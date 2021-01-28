@@ -26,12 +26,30 @@ package codeWar.codeWar0126;
 public class PlayingWithDigits {
     public static void main(String[] args) {
 
-        int n=92,p=1;
+        int n=46288,p=3;
         System.out.println(digPow(n,p));
+        System.out.println(study(n,p));
     }
     public static long digPow(int n, int p) {
         // your code
+        double result = 0;
+        String[] split = String.valueOf(n).split("");
+        for(int i=0;i<split.length;i++){
+            result += Math.pow(Double.parseDouble(split[i]), p);
+            p++;
+        }
+        if(result%n==0){
+            return (long) (result/n);
+        }
         return -1;
+    }
+
+    public static long study(int n, int p) {
+        String intString = String.valueOf(n);
+        long sum = 0;
+        for (int i = 0; i < intString.length(); ++i, ++p)
+            sum += Math.pow(Character.getNumericValue(intString.charAt(i)), p);
+        return (sum % n == 0) ? sum / n : -1;
     }
 
 }
