@@ -1,4 +1,4 @@
-package com.lingmeng.common.config.qiniu;
+package com.lingmeng.qiniu;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

@@ -1,4 +1,4 @@
-package com.lingmeng.common.config.qiniu;
+package com.lingmeng.qiniu;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

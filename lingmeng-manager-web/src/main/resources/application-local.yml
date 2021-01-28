@@ -139,9 +139,6 @@ qiniu:
 
   accessKey: naDNSb-_EB57vRk0_qdPTs1XShTGuzbW4S3ebQ02
   secretKey: kEeSdeCDgxiYqhfFP5ZFhgdITc3A4zTuCShsH6Jk
-
-
-
   # 附件上传的空间
   bucket: neuron-3d
   # app对应的3D模型上传的空间名称
@@ -152,4 +149,9 @@ qiniu:
   domain: cdn.3d.neurongenius.com
   # 附件生成下载链接的协议
   protocol: http
+photo:
+    #照片是否上传到七牛空间
+    qiNiuUsed: false
+    #文件访问地址
+    url: http://localhost:${server.port}
 
