@@ -8,10 +8,10 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 /**
- * @Author: wxl
- * @Date: 2019-09-27 15:14
- * @Description:
- */
+ * @author skin
+ * @Date  2021/1/30 18:53
+ * @description
+ **/
 public class HttpHelper {
     public static String getBodyString(HttpServletRequest request) {
         StringBuilder sb = new StringBuilder();
