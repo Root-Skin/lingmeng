@@ -1,4 +1,4 @@
-package codeWar.codeWar0125;
+package codeWar01.codeWar0125;
 
 import java.util.stream.IntStream;
 

@@ -1,4 +1,4 @@
-package codeWar.codeWar0120;
+package codeWar01.codeWar0120;
 
 import java.util.stream.Collectors;
 

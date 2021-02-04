@@ -1,4 +1,4 @@
-package codeWar.codeWar0131;
+package codeWar01.codeWar0131;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,4 +1,4 @@
-package codeWar.codeWar0124;
+package codeWar01.codeWar0124;
 
 /**
  * @author skin

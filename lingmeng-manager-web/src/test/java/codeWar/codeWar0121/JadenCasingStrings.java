@@ -1,4 +1,4 @@
-package codeWar.codeWar0121;
+package codeWar01.codeWar0121;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;

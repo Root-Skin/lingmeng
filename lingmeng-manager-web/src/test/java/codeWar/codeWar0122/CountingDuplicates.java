@@ -1,4 +1,4 @@
-package codeWar.codeWar0122;
+package codeWar01.codeWar0122;
 
 import java.util.Arrays;
 import java.util.Map;

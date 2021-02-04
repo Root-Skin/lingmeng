@@ -1,4 +1,4 @@
-package codeWar.codeWar0124.key5;
+package codeWar01.codeWar0124.key5;
 
 import java.util.Arrays;
 
