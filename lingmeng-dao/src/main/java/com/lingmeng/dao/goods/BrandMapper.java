@@ -45,4 +45,6 @@ public interface BrandMapper extends BaseMapper<Brand> {
        * @Description 根据ID批量查询 所有的名称
        **/
       List<Brand> queryNameByIds(@Param("ids")List<String> ids);
+
+
 }

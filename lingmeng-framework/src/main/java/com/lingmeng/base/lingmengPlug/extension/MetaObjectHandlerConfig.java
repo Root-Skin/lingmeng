@@ -1,7 +1,6 @@
 package com.lingmeng.base.lingmengPlug.extension;
 
 
-import com.lingmeng.util.UserUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;

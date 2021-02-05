@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lingmeng.dao.goods.SkuStockMapper">
+    <update id="SynchronizeToMysql">
+        UPDATE lm_sku_stock
+        SET stock=#{miaoshaRedisDataVo.stock}, spike_total =#{miaoshaRedisDataVo.spikeTotal}
+        WHERE sku_id=#{miaoshaRedisDataVo.id};
+    </update>
 
     <select id="selectBySkuId" resultType="com.lingmeng.goods.model.SkuStock">
 

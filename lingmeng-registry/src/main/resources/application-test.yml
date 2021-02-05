@@ -1,0 +1,14 @@
+server:
+  port: 10086
+spring:
+  application:
+    name: lingmeng-registry
+eureka:
+  server:
+    enable-self-preservation: false   #关闭自我保护
+    eviction-interval-timer-in-ms: 5000 #清理无效节点
+  client:
+    fetch-registry: false  #表示客户端是否从服务端获取实例注册信息
+    register-with-eureka: false  #是否被其他实例发现
+    service-url:   #注册到server上的地址
+      defaultZone: http://192.168.189.134:${server.port}/eureka

@@ -49,5 +49,6 @@ public class GoodsDetailListener {
          }
          // 创建页面
          goodSHTMLService.deleteHtml(id);
+
      }
 }

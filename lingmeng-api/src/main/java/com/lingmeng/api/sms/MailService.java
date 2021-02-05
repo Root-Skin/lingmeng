@@ -15,4 +15,12 @@ public interface MailService {
      * receiver 表示接受地址
      **/
     RestReturn getCode(@RequestParam String receiver);
+
+    /**
+     * @author skin
+     * @param Text
+     * @Date  2021/1/18 18:06
+     * @description 发送启动日志
+      **/
+    RestReturn sendStartLog(@RequestParam String Text);
 }

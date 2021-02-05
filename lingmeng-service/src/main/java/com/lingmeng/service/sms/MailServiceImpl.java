@@ -37,4 +37,16 @@ public class MailServiceImpl implements MailService {
         mailSender.send(message);//发送邮件
         return RestReturn.ok("发送成功");
     }
+
+    @Override
+    public RestReturn sendStartLog(String Text) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setSubject("系统启动日志");//设置邮件标题
+
+        message.setText(Text);    //设置邮件正文
+        message.setFrom("huangtaosta@163.com");//发件人
+        message.setTo("huangtaosta@163.com");//收件人
+        mailSender.send(message);//发送邮件
+        return RestReturn.ok("发送成功");
+    }
 }
