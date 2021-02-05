@@ -31,6 +31,11 @@ public enum LifeCycleEnum {
         for (LifeCycleEnum IndexModelEnum : LifeCycleEnum.values()) {
             result.put(IndexModelEnum.getValue(),IndexModelEnum);
         }
+
+        //tt也在这里进行了第一次提交
+        //tt也在这里进行了第一次提交
+        //tt也在这里进行了第一次提交
+        //tt也在这里进行了第一次提交
         return result;
     }
 }
