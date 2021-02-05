@@ -31,6 +31,12 @@ public enum LifeCycleEnum {
         for (LifeCycleEnum IndexModelEnum : LifeCycleEnum.values()) {
             result.put(IndexModelEnum.getValue(),IndexModelEnum);
         }
+
+        //这里是xx写的第一行
+        //这里是xx写的第一行
+        //这里是xx写的第一行
+        //这里是xx写的第一行
+
         return result;
     }
 }
