@@ -32,10 +32,13 @@ public enum LifeCycleEnum {
             result.put(IndexModelEnum.getValue(),IndexModelEnum);
         }
 
+
         //这里是xx写的第一行
         //这里是xx写的第一行
         //这里是xx写的第一行
         //这里是xx写的第一行
+        //tt也在这里进行了第一次提交
+        //tt也在这里进行了第一次提交
 
         return result;
     }
