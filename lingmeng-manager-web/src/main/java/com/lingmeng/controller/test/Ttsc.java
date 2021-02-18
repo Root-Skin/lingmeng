@@ -29,6 +29,7 @@ public class Ttsc {
     }
     @RequestMapping("/testEnum2")
     public RestReturn test2() {
+
         testEnum testEnum = testEnumMapper.selectById("1357285455075520514");
         return RestReturn.ok(testEnum);
     }
