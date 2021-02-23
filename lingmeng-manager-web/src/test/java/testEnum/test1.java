@@ -24,7 +24,7 @@ public class test1 {
     @Test
     public void Ttsc() {
         testEnum test = new testEnum();
-        test.setTest(ttEnum.ONLINE);
+        test.setTest2(ttEnum.ONLINE);
         testEnumMapper.insert(test);
     }
 

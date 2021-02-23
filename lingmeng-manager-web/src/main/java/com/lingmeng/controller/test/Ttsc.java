@@ -23,14 +23,14 @@ public class Ttsc {
     @RequestMapping("/testEnum")
     public RestReturn sendEmailCode() {
         testEnum test = new testEnum();
-        test.setTest(ttEnum.ONLINE);
+        test.setTest2(ttEnum.ONLINE);
         testEnumMapper.insert(test);
         return RestReturn.ok();
     }
     @RequestMapping("/testEnum2")
     public RestReturn test2() {
 
-        testEnum testEnum = testEnumMapper.selectById("1357285455075520514");
+        testEnum testEnum = testEnumMapper.selectById("1364149787373686786");
         return RestReturn.ok(testEnum);
     }
 

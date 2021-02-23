@@ -23,7 +23,6 @@ public class lingmengTest {
     private SysExecutedMethodsMapper sysExecutedMethodsMapper;
     @GetMapping("/list")
     public RestReturn list() {
-
         enumTestReq req = new enumTestReq();
         req.setEnum2(LifeCycleEnum.EXCEPTION);
         SysExecutedMethods sysExecutedMethods = sysExecutedMethodsMapper.query(req);

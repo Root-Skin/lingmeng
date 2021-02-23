@@ -66,6 +66,9 @@ mybatis-plus:                #配置mybatis的映射包
   configuration:
     map-underscore-to-camel-case: true  #开启user_name 对应userName驼峰命名法
     cache-enabled: true
+  type-enums-package: com.lingmeng.testEnum
+  configuration.default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
+
 jwt:
   secret: lingmengSecret
   pubKeyPath: D:\\tem_key\\rsa.pub

@@ -50,6 +50,7 @@ mybatis-plus:                #配置mybatis的映射包
   configuration:
     map-underscore-to-camel-case: true  #开启user_name 对应userName驼峰命名法
     cache-enabled: true
+  type-handlers-package: com.lingmeng.handler.*  #配置枚举映射
 jwt:
   secret: lingmengSecret
   pubKeyPath: /lingmeng/keyPath/rsa.pub

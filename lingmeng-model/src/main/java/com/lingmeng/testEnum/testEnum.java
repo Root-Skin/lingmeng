@@ -12,5 +12,5 @@ import lombok.Data;
 @TableName("lm_test")
 public class testEnum {
     private  String id;
-    private  ttEnum test;
+    private  ttEnum test2;
 }
