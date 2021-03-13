@@ -88,6 +88,8 @@ public class UserTest {
         BigDecimal bigDecimal2 = BigDecimal.ZERO;
         int i = bigDecimal2.compareTo(BigDecimal.ZERO);
         System.out.println(i);
+        //xx开发的代码有了冲突
+        //xx的代码
 
     }
 }
