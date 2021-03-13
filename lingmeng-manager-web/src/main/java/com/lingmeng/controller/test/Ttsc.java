@@ -29,9 +29,22 @@ public class Ttsc {
     }
     @RequestMapping("/testEnum2")
     public RestReturn test2() {
-
         testEnum testEnum = testEnumMapper.selectById("1364149787373686786");
         return RestReturn.ok(testEnum);
+    }
+    //普通接口调用
+    @RequestMapping("/testUse")
+    public RestReturn testUse() {
+
+        System.out.println("哇哈哈222");
+        for(int i=0;i<9999999;i++){
+            Thread t = Thread.currentThread();
+            String name = t.getName();
+            System.out.println(name);
+        }
+//        System.out.println("sleep11");
+
+        return RestReturn.ok("成功");
     }
 
 }

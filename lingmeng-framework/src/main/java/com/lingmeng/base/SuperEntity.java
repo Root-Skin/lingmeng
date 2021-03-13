@@ -40,4 +40,6 @@ public class SuperEntity<T extends Model> extends Model{
         return this.id;
     }
 
+    @TableField(exist = false)
+    private String name;
 }

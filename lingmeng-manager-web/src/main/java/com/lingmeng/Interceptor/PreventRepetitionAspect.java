@@ -57,7 +57,6 @@ public class PreventRepetitionAspect {
 					}
 				}
 			}
-			
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -56,12 +56,10 @@ public class Constant {
     public final static String ACCOUNT_PHONE = "accountPhone";
 
     public final static String PASSWORD = "password";
-
     /**
      * JWT-currentTimeMillis:
      */
     public final static String CURRENT_TIME_MILLIS = "currentTimeMillis";
-
     /**
      * PASSWORD_MAX_LEN
      */

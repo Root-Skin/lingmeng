@@ -18,6 +18,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -32,11 +33,8 @@ public class MiaoshaOrderServiceImpl implements ImiaoshaOrderService {
 
     @Autowired
     private RedisTemplate redisTemplate;
-
     @Autowired
     private MiaoshaOrderMapper miaoshaOrderMapper;
-
-
     @Autowired
     private SkuStockMapper skuStockMapper;
     @Autowired
@@ -55,36 +53,34 @@ public class MiaoshaOrderServiceImpl implements ImiaoshaOrderService {
         if (miaoshaQueueVo != null) {
 
             Object o = redisTemplate.boundListOps("miaoshaGoodCountList_" + miaoshaQueueVo.getSkuId()).rightPop();
+
+            //这里第三个人 已经进来了,但是前面2个已经被抢空了(多线程下,判断库存没用进行报异常) --防止超卖
             if (o == null) {
                 //clean queue
                 cleanQueue(miaoshaQueueVo);
                 return false;
             }
-
-
             String time = miaoshaQueueVo.getTime();
             String skuId = miaoshaQueueVo.getSkuId();
             String userName = miaoshaQueueVo.getUserName();
+
              miaoshaGoodsInRedis = JSON.parseObject(this.redisTemplate.boundHashOps("miaoshaGood_" + time).get(skuId).toString(), MiaoshaRedisDataVo.class);
             if (miaoshaGoodsInRedis == null || miaoshaGoodsInRedis.getStock() == 0) {
                 throw new RestException("This item is sold out");
             }
+
+            //生成预订单
             MiaoshaOrder miaoshaOrder = new MiaoshaOrder();
+            //这里应该自己生成ID.但是不保存到数据库
+            miaoshaOrder.setId(UUID.randomUUID().toString().replace("-", ""));
             miaoshaOrder.setUserName(userName);
             miaoshaOrder.setSkuId(skuId);
             miaoshaOrder.setPayMoney(miaoshaGoodsInRedis.getPrice());
             miaoshaOrder.setStatus(1);
 
-            miaoshaOrderMapper.insert(miaoshaOrder);
+//            miaoshaOrderMapper.insert(miaoshaOrder);
 
-            //update status  and refresh redis status
-            miaoshaQueueVo.setMiaoshaStatus(2);
-            miaoshaQueueVo.setOrderId(miaoshaOrder.getId());
-            miaoshaQueueVo.setPayMoney(miaoshaOrder.getPayMoney());
-            //排队完成 等待支付
-            redisTemplate.boundHashOps("currentUserGrabbingStatus").put(userName, miaoshaQueueVo);
-
-            //Put this Order into redis
+            //Put this Order into redis)
             this.redisTemplate.boundHashOps("miaoshaOrder").put(userName, miaoshaOrder);
             //过期时间10分钟
             redisTemplate.boundListOps("miaoshaOrder").expire(5, TimeUnit.MINUTES);
@@ -96,6 +92,8 @@ public class MiaoshaOrderServiceImpl implements ImiaoshaOrderService {
             miaoshaGoodsInRedis.setStock(miaoshaGoodCount.intValue());
             //Add have miaosha(已秒杀数量)
 
+
+            //同步修改redis　时间中存储的数量（上面用户判断）
             miaoshaGoodsInRedis.setSpikeTotal( new AtomicInteger(miaoshaGoodsInRedis.getSpikeTotal()).incrementAndGet());
             System.out.println(miaoshaGoodsInRedis.getSpikeTotal());
 //            synchronized (this) {
@@ -113,6 +111,14 @@ public class MiaoshaOrderServiceImpl implements ImiaoshaOrderService {
                 this.redisTemplate.boundHashOps("miaoshaGood_" + time).put(skuId, miaoshaGoodsInRedis);
             }
             //The order status is put into the delay queue
+
+            //update status  and refresh redis status
+            miaoshaQueueVo.setMiaoshaStatus(2);
+            miaoshaQueueVo.setOrderId(miaoshaOrder.getId());
+            miaoshaQueueVo.setPayMoney(miaoshaOrder.getPayMoney());
+            //排队完成 等待支付
+            redisTemplate.boundHashOps("currentUserGrabbingStatus").put(userName, miaoshaQueueVo);
+
             mqService.sendOrderDelayMessage(miaoshaQueueVo);
             return true;
         }

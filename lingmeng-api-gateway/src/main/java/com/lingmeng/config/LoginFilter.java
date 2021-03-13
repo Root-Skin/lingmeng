@@ -61,6 +61,12 @@ public class LoginFilter extends ZuulFilter {
          return flag;
     }
 
+    /**
+     * @author skin
+     * @param
+     * @Date  2021/2/26 14:39
+     * @description  这里过滤器主要用作访问权限控制
+     **/
     @Override
     public Object run() throws ZuulException {
         RequestContext currentContext = RequestContext.getCurrentContext();

@@ -23,6 +23,7 @@ public class MiaoshaController {
 
     @Autowired
     private ImiaoshaService imiaoshaService;
+
      /**
       * @Author skin
       * @Date  2020/12/9
