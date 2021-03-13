@@ -27,9 +27,6 @@ public class QiniuFactory {
     @Autowired
     private QiNiuConfig qiNiuConfig;
 
-
-
-
     private  static ConcurrentHashMap<Integer, AbstractTemplate> data = new ConcurrentHashMap();
 
     /**

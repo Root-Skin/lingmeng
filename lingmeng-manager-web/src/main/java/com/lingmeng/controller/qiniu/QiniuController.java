@@ -70,8 +70,6 @@ public class QiniuController extends ApiController {
             } else {
                 key = UUID.randomUUID().toString().toUpperCase();
             }
-
-
             if (StringUtils.isEmpty(baseUrl)) {
                 key = key + "." + endUrl;
             } else {

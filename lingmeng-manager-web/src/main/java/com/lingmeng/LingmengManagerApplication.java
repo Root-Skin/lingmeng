@@ -37,7 +37,8 @@ import java.time.format.DateTimeFormatter;
         "com.lingmeng.enums",
         "com.lingmeng.script",
         "com.lingmeng.sqlScript",
-        "com.lingmeng.qiniu"
+        "com.lingmeng.qiniu",
+        "com.lingmeng.testEnum"
 })
 public class LingmengManagerApplication {
 

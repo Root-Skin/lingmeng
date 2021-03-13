@@ -61,7 +61,6 @@ public class SmsListener {
         if(msg ==null ){
             return;
         }
-
         logger.info("开始消费消息");
         //发送验证码
         try {

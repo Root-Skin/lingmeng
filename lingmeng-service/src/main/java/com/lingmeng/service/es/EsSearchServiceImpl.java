@@ -197,15 +197,10 @@ public class EsSearchServiceImpl implements ISearchService {
         if (StringUtils.isBlank(key)) {
             return null;
         }
-
-
         // 构建查询条件
         NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
-
         QueryBuilder query = buildBasicQueryWithFilter(req);
-
 //        MatchQueryBuilder basicQuery = QueryBuilders.matchQuery("all", key).operator(Operator.AND);
-
         // 1、对key进行全文检索查询
         queryBuilder.withQuery(query);
 

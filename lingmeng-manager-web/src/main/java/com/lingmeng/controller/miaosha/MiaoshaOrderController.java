@@ -46,7 +46,6 @@ public class MiaoshaOrderController {
             throw new RestException("10000");
         }
 
-
         //使用redis自增 判断该用户是否排队(所以用户名字不可以重复)
         Long userQueueCount = redisTemplate.boundHashOps("UserQueueCount").increment(userName, 1);
         if (userQueueCount > 1) {
@@ -54,8 +53,12 @@ public class MiaoshaOrderController {
             throw new RestException("10001");
         }
 
+        //秒杀等待支付
         MiaoshaQueueVo miaoshaQueueVo = new MiaoshaQueueVo(userName, new Date(), 1, id, time);
         //Put the Queuing information into redis
+
+        //用户同时点击
+        //面试:既然库存已经限制了(这里就可以不用排队了啊)
         redisTemplate.boundListOps("miaoshaQueue").leftPush(miaoshaQueueVo);
 
         //将具体用户的抢单状态 放入Hash(排队中的订单)

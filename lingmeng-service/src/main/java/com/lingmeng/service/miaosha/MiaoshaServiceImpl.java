@@ -27,8 +27,6 @@ public class MiaoshaServiceImpl implements ImiaoshaService {
     @Autowired
     private MiaoshaOrderMapper miaoshaOrderMapper;
 
-
-
     @Autowired
     private SkuStockMapper skuStockMapper;
 
