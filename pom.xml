@@ -38,6 +38,10 @@
         <jsql.version>3.1</jsql.version>
         <mq.version>2.3.1.RELEASE</mq.version>
         <sms.version>4.5.3</sms.version>
+        <scala.version>2.11</scala.version>
+        <flink.version>1.6.1</flink.version>
+        <hadoop.version>2.7.5</hadoop.version>
+        <hbase.version>2.0.0</hbase.version>
     </properties>
 
     <dependencyManagement>
@@ -114,6 +118,96 @@
                 <artifactId>wxpay-sdk</artifactId>
                 <version>0.0.3</version>
             </dependency>
+
+            <!--大数据模块-->
+            <!--kafka 客户端-->
+            <dependency>
+                <groupId>org.apache.kafka</groupId>
+                <artifactId>kafka_${scala.version}</artifactId>
+                <version>0.10.1.0</version>
+            </dependency>
+
+
+            <!--flink对接kafka：导入flink使用kafka的依赖-->
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-connector-kafka-0.10_${scala.version}</artifactId>
+                <version>${flink.version}</version>
+            </dependency>
+
+            <!--批处理-->
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-table_${scala.version}</artifactId>
+                <version>${flink.version}</version>
+            </dependency>
+            <!--导入scala的依赖-->
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-scala_${scala.version}</artifactId>
+                <version>${flink.version}</version>
+            </dependency>
+
+            <!--模块二 流处理-->
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-streaming-scala_${scala.version}</artifactId>
+                <version>${flink.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-streaming-java_${scala.version}</artifactId>
+                <version>${flink.version}</version>
+            </dependency>
+
+            <!--数据落地flink和hbase的集成依赖-->
+            <dependency>
+                <groupId>org.apache.flink</groupId>
+                <artifactId>flink-hbase_${scala.version}</artifactId>
+                <version>${flink.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.hbase</groupId>
+                <artifactId>hbase-client</artifactId>
+                <version>${hbase.version}</version>
+            </dependency>
+
+
+
+            <!--hbase依赖于hadoop-->
+            <dependency>
+                <groupId>org.apache.hadoop</groupId>
+                <artifactId>hadoop-common</artifactId>
+                <version>${hadoop.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.hadoop</groupId>
+                <artifactId>hadoop-hdfs</artifactId>
+                <version>${hadoop.version}</version>
+                <!--xml.parser冲突 flink hdfs-->
+                <exclusions>
+                    <exclusion>
+                        <groupId>xml-apis</groupId>
+                        <artifactId>xml-apis</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.hadoop</groupId>
+                <artifactId>hadoop-client</artifactId>
+                <version>${hadoop.version}</version>
+                <!--数据同步：canal 和 hadoop protobuf-->
+                <exclusions>
+                    <exclusion>
+                        <groupId>com.google.protobuf</groupId>
+                        <artifactId>protobuf-java</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
 
         </dependencies>
 

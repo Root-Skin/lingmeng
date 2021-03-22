@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 @ConfigurationProperties(prefix = "redis")
 public class RedisConfig {
+
     private String host = "192.168.189.134";
     private int port = 6379;
     private String password ;

@@ -60,6 +60,18 @@ spring:
       max-idle: 20
       # 连接池中的最小空闲连接
       min-idle: 0
+  kafka:
+    bootstrap_servers_config: 192.168.189.134:9092
+    #如果出现发送失败的情况，允许重试的次数
+    retries_config: 0
+    #每个批次发送多大的数据
+    batch_size_config: 4096
+    #定时发送，达到1ms发送
+    linger_ms_config: 1
+    #缓存的大小
+    buffer_memory_config: 40960
+    #TOPIC的名字
+    topic: test
 mybatis-plus:                #配置mybatis的映射包
   mapper-locations: classpath*:com/lingmeng/dao/**/xml/*Mapper.xml
   typeAliasesPackage: com.lingmeng.model.*.model
@@ -157,4 +169,6 @@ photo:
     qiNiuUsed: false
     #文件访问地址
     url: http://localhost:${server.port}
+#kafka的服务器地址
+
 
