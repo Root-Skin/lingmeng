@@ -15,15 +15,11 @@ public class MqConf {
 
     public static final String LINGMENG_EXCHANGE = "lingmeng_order_exchange";
     public static final String LINGMENG_QUEUE = "lingmeng_order_queue";
+    public static final String LINGMENG_QUEUE_ROUTE_KEY = "lingmeng_order_queue_route_key";
 
     public static final String LINGMENG_DEAD_EXCHANGE = "lingmeng_order_dead_exchange";
     public static final String LINGMENG_DEAD_QUEUE = "lingmeng_order_dead_queue";
     public static final String LINGMENG_DEAD_ROUTE_KEY = "lingmeng_dead_route_key";
-
-
-
-    public static final String NORMAL_LINGMENG_DEAD_ROUTE_KEY = "normal_lingmeng_dead_route_key";
-    public static final String NORMAL_LINGMENG_DEAD_QUEUE = "normal_lingmeng_order_dead_queue";
 
     // 定义交换机
     @Bean

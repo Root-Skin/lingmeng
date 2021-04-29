@@ -1,7 +1,6 @@
 package com.lingmeng.common.listen;
 
 
-import com.alibaba.fastjson.JSON;
 import com.lingmeng.common.config.MqConf;
 import com.lingmeng.common.config.NormalOrderMqConf;
 import com.lingmeng.common.utils.aliPay.AliPayHelper;
@@ -52,12 +51,12 @@ public class OrderDelayListener {
     @RabbitListener(queues = MqConf.LINGMENG_DEAD_QUEUE)
     void mqDeadReceive(Message message, com.rabbitmq.client.Channel channel) throws IOException {
         log.info("死信开始消费");
-        System.out.println("repeatTradeQueue 接收时间:"+ LocalDateTime.now().toString()+" 接收内容:");
-        String content = new String(message.getBody());
-        MiaoshaQueueVo miaoshaQueueVo = JSON.parseObject(content, MiaoshaQueueVo.class);
-        System.out.println("miaoshaQueueVo");
+//        System.out.println("repeatTradeQueue 接收时间:"+ LocalDateTime.now().toString()+" 接收内容:");
+//        String content = new String(message.getBody());
+//        MiaoshaQueueVo miaoshaQueueVo = JSON.parseObject(content, MiaoshaQueueVo.class);
+//        System.out.println("miaoshaQueueVo");
         //如果不进行ack,查看是否进入死信
-        channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
+//        channel.basicAck(message.getMessageProperties().getDeliveryTag(), false);
         log.info("死信开始消费结束");
     }
 

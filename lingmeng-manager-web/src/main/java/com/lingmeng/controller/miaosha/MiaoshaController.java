@@ -19,8 +19,6 @@ import java.util.stream.Collectors;
 @RequestMapping("/miaosha")
 public class MiaoshaController {
 
-
-
     @Autowired
     private ImiaoshaService imiaoshaService;
 
@@ -55,6 +53,7 @@ public class MiaoshaController {
         List<MiaoshaRedisDataVo> miaoshaGoodsByTime = imiaoshaService.getMiaoshaGoodsByTime(formatTime);
         return RestReturn.ok(miaoshaGoodsByTime);
     }
+
      /**
       * @Author skin
       * @Date  2020/12/10

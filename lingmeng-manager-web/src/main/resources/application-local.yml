@@ -30,7 +30,7 @@ spring:
   rabbitmq: #配置mq
     username: lingmeng
     password: lingmeng
-    host: 192.168.189.134
+    host: 192.168.189.135
     port: 5672
     cache:
       channel:
@@ -39,17 +39,19 @@ spring:
         simple:
           acknowledge-mode: manual
           retry:
-            max-attempts: 1
-            multiplier: 1
-            enabled: true
+            max-attempts: 3     # 最大重试3次
+            multiplier: 1      # 应用于前一重试间隔的乘法器。
+            enabled: true      # 开始自动重试
+            initial-interval: 1000    # 消息多次消费的间隔1秒
+    publisher-confirm-type: correlated
   redis:
     # Redis服务器地址
-    host: 192.168.189.134
+    host: 192.168.189.135
     # Redis服务器连接端口
     port: 6379
     # Redis服务器连接密码（默认为空）
     password:
-    timeout: 2000
+    timeout: 5000
     database: 0
     pool:
       # 连接池最大连接数（使用负值表示没有限制）
@@ -61,7 +63,7 @@ spring:
       # 连接池中的最小空闲连接
       min-idle: 0
   kafka:
-    bootstrap_servers_config: 192.168.189.134:9092
+    bootstrap_servers_config: 192.168.189.135:9092
     #如果出现发送失败的情况，允许重试的次数
     retries_config: 0
     #每个批次发送多大的数据
@@ -80,7 +82,6 @@ mybatis-plus:                #配置mybatis的映射包
     cache-enabled: true
   type-enums-package: com.lingmeng.testEnum
   configuration.default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
-
 jwt:
   secret: lingmengSecret
   pubKeyPath: D:\\tem_key\\rsa.pub
@@ -107,7 +108,7 @@ fdfs:
     width: 60
     height: 60
   tracker-list: # tracker地址
-    - 192.168.189.134:22122
+    - 192.168.189.135:22122
 logging:
   level:
     com.lingmeng.dao: debug

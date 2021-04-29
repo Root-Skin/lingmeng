@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "redis")
 public class RedisConfig {
 
-    private String host = "192.168.189.134";
+    private String host = "192.168.189.135";
     private int port = 6379;
     private String password ;
     private int timeout = 2000;

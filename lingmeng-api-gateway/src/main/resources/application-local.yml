@@ -4,7 +4,7 @@ spring:
   application:
     name: api-gateway
   redis:
-    host: 192.168.189.134
+    host: 192.168.189.135
 eureka:
   client:
     service-url:

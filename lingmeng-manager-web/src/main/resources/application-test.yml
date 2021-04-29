@@ -10,7 +10,7 @@ spring:
       max-file-size: 5MB  #限制上传文件大小
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.189.134:3306/lingmeng?serverTimezone=GMT%2B8
+    url: jdbc:mysql://192.168.189.135:3306/lingmeng?serverTimezone=GMT%2B8
     username: root
     password: huangtao123456
     hikari:
@@ -30,7 +30,7 @@ spring:
   rabbitmq: #配置mq
     username: lingmeng
     password: lingmeng
-    host: 192.168.189.134
+    host: 192.168.189.135
     port: 5672
     cache:
       channel:
@@ -42,8 +42,9 @@ spring:
               max-attempts: 1
               multiplier: 1
               enabled: true
+              initial-interval: 1000    # 消息多次消费的间隔2秒
   redis:
-    host: 192.168.189.134
+    host: 192.168.189.135
 mybatis-plus:                #配置mybatis的映射包
   mapper-locations: classpath*:com/lingmeng/dao/**/xml/*Mapper.xml
   typeAliasesPackage: com.lingmeng.model.*.model
@@ -61,15 +62,15 @@ jwt:
 eureka:
   client:
     service-url:
-      defaultZone: http://192.168.189.134:10086/eureka
+      defaultZone: http://192.168.189.135:10086/eureka
   instance:
     prefer-ip-address: true #表示不使用主机名来定义 而是使用IP
-    ip-address: 192.168.189.134  #ip
+    ip-address: 192.168.189.135  #ip
     instance-id: ${spring.application.name}:${server.port}
     lease-renewal-interval-in-seconds: 2 #5s发送一次心跳
     lease-expiration-duration-in-seconds: 20 #10s不发送就过期
 ribbon:
-    listOfServers: http://192.168.189.134:8090
+    listOfServers: http://192.168.189.135:8090
 fdfs:
   so-timeout: 1501
   connect-timeout: 601
@@ -77,7 +78,7 @@ fdfs:
     width: 60
     height: 60
   tracker-list: # tracker地址
-    - 192.168.189.134:22122
+    - 192.168.189.135:22122
 logging:
   level:
     com.lingmeng.dao: debug

@@ -11,4 +11,4 @@ eureka:
     fetch-registry: false  #表示客户端是否从服务端获取实例注册信息
     register-with-eureka: false  #是否被其他实例发现
     service-url:   #注册到server上的地址
-      defaultZone: http://192.168.189.134:${server.port}/eureka
+      defaultZone: http://192.168.189.135:${server.port}/eureka

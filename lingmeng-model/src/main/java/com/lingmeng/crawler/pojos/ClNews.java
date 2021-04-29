@@ -1,9 +1,6 @@
 package com.lingmeng.crawler.pojos;
 
 
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.lingmeng.crawler.core.parse.ZipUtils;
-
 import java.util.Date;
 
 /**
@@ -28,10 +25,7 @@ public class ClNews {
     private String content;
     private String labelIds;
     public String getUnCompressContent() {
-        if (StringUtils.isNotEmpty(content)) {
-            return ZipUtils.gunzip(content);
-        }
-        return content;
+        return  null;
     }
 
 

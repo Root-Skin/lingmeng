@@ -2,9 +2,11 @@ package com.lingmeng.controller.miaosha;
 
 import com.lingmeng.api.miaosha.ImiaoshaOrderService;
 import com.lingmeng.base.RestReturn;
+import com.lingmeng.common.utils.testUtil.randomNamesUtil;
 import com.lingmeng.dao.miaosha.MiaoshaOrderMapper;
 import com.lingmeng.exception.RestException;
 import com.lingmeng.miaosha.vo.MiaoshaQueueVo;
+import com.lingmeng.service.miaosha.feign.FeignCreaseStock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,12 +22,15 @@ public class MiaoshaOrderController {
 
     @Autowired
     private ImiaoshaOrderService imiaoshaOrderService;
+
     @Autowired
     private MiaoshaOrderMapper miaoshaOrderMapper;
 
-
     @Autowired
     private RedisTemplate redisTemplate;
+
+    @Autowired
+    private FeignCreaseStock feignCreaseStock;
 
     /**
      * @author skin
@@ -34,34 +39,25 @@ public class MiaoshaOrderController {
      * @Date  2021/1/17 16:48
      * @description 秒杀下单
      **/
+
     @GetMapping("/miaoshaCreateOrder")
     public RestReturn miaoshaCreateOrder(String id, String time) {
 
         String userName = "skin";
 
-        //判断是否有库存
         Long size = redisTemplate.boundListOps("miaoshaGoodCountList_" + id).size();
         if (size == null || size <= 0) {
-            //没有库存了
             throw new RestException("10000");
         }
-
-        //使用redis自增 判断该用户是否排队(所以用户名字不可以重复)
         Long userQueueCount = redisTemplate.boundHashOps("UserQueueCount").increment(userName, 1);
         if (userQueueCount > 1) {
-            //表示重复排队了
             throw new RestException("10001");
         }
 
-        //秒杀等待支付
         MiaoshaQueueVo miaoshaQueueVo = new MiaoshaQueueVo(userName, new Date(), 1, id, time);
-        //Put the Queuing information into redis
 
-        //用户同时点击
-        //面试:既然库存已经限制了(这里就可以不用排队了啊)
         redisTemplate.boundListOps("miaoshaQueue").leftPush(miaoshaQueueVo);
 
-        //将具体用户的抢单状态 放入Hash(排队中的订单)
         redisTemplate.boundHashOps("currentUserGrabbingStatus").put(userName, miaoshaQueueVo);
 
         Boolean spikeResult = imiaoshaOrderService.miaoshaCreateOrder();
@@ -94,7 +90,11 @@ public class MiaoshaOrderController {
      * @description jmeter多用户抢单
      **/
     @GetMapping("/miaoshaCreateOrder2")
-    public RestReturn miaoshaCreateOrder(String id, String time,String userName) {
+    public RestReturn miaoshaCreateOrder() {
+
+        String id = "0688ec9f9fd200373ccee0f1cc3ce115";  //商品ID
+        String time = "2021042816";   //时间段
+        String userName = randomNamesUtil.getChineseName();  //生成名字
 
         //判断是否有库存
         Long size = redisTemplate.boundListOps("miaoshaGoodCountList_" + id).size();
@@ -102,8 +102,6 @@ public class MiaoshaOrderController {
             //没有库存了
             throw new RestException("10000");
         }
-
-
         //使用redis自增 判断该用户是否排队(所以用户名字不可以重复)
         Long userQueueCount = redisTemplate.boundHashOps("UserQueueCount").increment(userName, 1);
         //设置过期事时间10s
@@ -112,16 +110,13 @@ public class MiaoshaOrderController {
             //表示重复排队了
             throw new RestException("10001");
         }
-
         MiaoshaQueueVo miaoshaQueueVo = new MiaoshaQueueVo(userName, new Date(), 1, id, time);
         //Put the Queuing information into redis
         redisTemplate.boundListOps("miaoshaQueue").leftPush(miaoshaQueueVo);
         //设置过期时间10分钟
         redisTemplate.boundListOps("miaoshaQueue").expire(5,TimeUnit.MINUTES);
-
         //将具体用户的抢单状态 放入Hash(排队中的订单)
         redisTemplate.boundHashOps("currentUserGrabbingStatus").put(userName, miaoshaQueueVo);
-
         //设置过期时间10分钟
         redisTemplate.boundListOps("currentUserGrabbingStatus").expire(5,TimeUnit.MINUTES);
 

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -21,6 +22,7 @@ import java.time.format.DateTimeFormatter;
 
 @SpringBootApplication
 @EnableDiscoveryClient
+@EnableFeignClients                         //开启feign--主要来作秒杀的调用
 @MapperScan("com.lingmeng.dao")
 @EnableAsync
 @Slf4j

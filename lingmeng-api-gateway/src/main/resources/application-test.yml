@@ -4,15 +4,15 @@ spring:
   application:
     name: api-gateway
   redis:
-    host: 192.168.189.134
+    host: 192.168.189.135
 eureka:
   client:
     service-url:
-      defaultZone: http://192.168.189.134:10086/eureka #注册到eureka上的端口地址
+      defaultZone: http://192.168.189.135:10086/eureka #注册到eureka上的端口地址
     registry-fetch-interval-seconds: 5 #定期5s去拉取服务上的注册信息
   instance:
     prefer-ip-address: true #表示不使用主机名来定义 而是使用IP
-    ip-address: 192.168.189.134  #ip
+    ip-address: 192.168.189.135  #ip
     instance-id: ${spring.application.name}:${server.port}
     lease-renewal-interval-in-seconds: 5 #5s发送一次心跳
     lease-expiration-duration-in-seconds: 10 #10s不发送就过期

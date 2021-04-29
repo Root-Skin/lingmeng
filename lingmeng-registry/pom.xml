@@ -47,12 +47,12 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.4.12</version>
                 <configuration>
-                    <imageName>192.168.189.134:5000/${docker.image.prefix}/${project.artifactId}</imageName>
+                    <imageName>192.168.189.135:5000/${docker.image.prefix}/${project.artifactId}</imageName>
                     <imageTags>
                         <imageTag>${project.version}</imageTag>
                     </imageTags>
                     <!-- 指定Dockerfile所在的路径 -->
-                    <dockerHost>http://192.168.189.134:2375</dockerHost>
+                    <dockerHost>http://192.168.189.135:2375</dockerHost>
                     <dockerDirectory>src/main/docker</dockerDirectory>
                     <resources>
                         <resource>
