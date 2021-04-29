@@ -24,6 +24,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     // 定义一个线程域，存放登录用户(线程内共享)
     private static final ThreadLocal<UserInfo> tl = new ThreadLocal<>();
 
+
+    //这里的jwt是从拦截器配置哪里传递过来的
     public LoginInterceptor(JwtProperties jwtProperties) {
         this.jwtProperties = jwtProperties;
     }
@@ -64,6 +66,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     }
 
     public static UserInfo getLoginUser() {
+
         return tl.get();
     }
 }

@@ -7,6 +7,7 @@ import lombok.Data;
 
 @TableName("lm_user")
 @Data
+
 public class User  extends SuperEntity {
     /** 用户名 */
 

@@ -23,6 +23,8 @@ import java.security.PublicKey;
 @ConfigurationProperties(prefix = "jwt")
 public class JwtProperties {
 
+
+
     private static final Logger logger = LoggerFactory.getLogger(JwtProperties.class);
 
     private String secret;

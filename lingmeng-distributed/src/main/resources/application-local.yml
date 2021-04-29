@@ -1,0 +1,54 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: lingmeng-distributed
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/lingmeng_stock?serverTimezone=GMT%2B8
+    username: root
+    password: huangtao123456
+    hikari:
+      maximum-pool-size: 30 #最大连接数目
+      minimum-idle: 10  #最大空闲数目
+  redis:
+    # Redis服务器地址
+    host: 192.168.189.135
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password:
+    timeout: 5000
+    database: 0
+    pool:
+      # 连接池最大连接数（使用负值表示没有限制）
+      max-active: 400
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-wait: -1
+      # 连接池中的最大空闲连接
+      max-idle: 20
+      # 连接池中的最小空闲连接
+      min-idle: 0
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+  instance:
+    prefer-ip-address: true #表示不使用主机名来定义 而是使用IP
+    ip-address: 127.0.0.1  #ip
+    instance-id: ${spring.application.name}:${server.port}
+    lease-renewal-interval-in-seconds: 2 #5s发送一次心跳
+    lease-expiration-duration-in-seconds: 20 #10s不发送就过期
+ribbon:
+    listOfServers: http://localhost:8090
+logging:
+  level:
+    com.lingmeng.dao: debug
+mybatis-plus:                #配置mybatis的映射包
+  mapper-locations: classpath*:com/lingmeng/dao/**/xml/*Mapper.xml
+  typeAliasesPackage: com.lingmeng.model.*.model
+  configuration:
+    map-underscore-to-camel-case: true  #开启user_name 对应userName驼峰命名法
+    cache-enabled: true
+  type-enums-package: com.lingmeng.testEnum
+  configuration.default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler

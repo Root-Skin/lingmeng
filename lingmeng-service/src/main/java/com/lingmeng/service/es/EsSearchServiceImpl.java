@@ -35,6 +35,7 @@ import org.springframework.data.elasticsearch.core.query.FetchSourceFilter;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -42,6 +43,8 @@ import java.util.*;
 
 @Service
 public class EsSearchServiceImpl implements ISearchService {
+
+
     private static final Logger logger = LoggerFactory.getLogger(EsSearchServiceImpl.class);
 
     @Autowired
@@ -73,6 +76,7 @@ public class EsSearchServiceImpl implements ISearchService {
     private ElasticsearchRestTemplate elasticsearchRestTemplate;
 
 
+    @Transactional
     public Goods buildGoods(SpuListRes req) {
         Goods newGoods = new Goods();
 
@@ -193,15 +197,10 @@ public class EsSearchServiceImpl implements ISearchService {
         if (StringUtils.isBlank(key)) {
             return null;
         }
-
-
         // 构建查询条件
         NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
-
         QueryBuilder query = buildBasicQueryWithFilter(req);
-
 //        MatchQueryBuilder basicQuery = QueryBuilders.matchQuery("all", key).operator(Operator.AND);
-
         // 1、对key进行全文检索查询
         queryBuilder.withQuery(query);
 
@@ -431,7 +430,6 @@ public class EsSearchServiceImpl implements ISearchService {
     public void createIndex(String id) {
 
         Spu spu = this.spuMapper.selectById(id);
-
         List<Brand> brands = brandMapper.queryNameByIds(Arrays.asList(spu.getBrandId()));
         List<Category> categories = categoryMapper.queryNameByIds((Arrays.asList(spu.getCid2())));
 
@@ -447,6 +445,8 @@ public class EsSearchServiceImpl implements ISearchService {
 
         // 保存数据到索引库
         this.goodsRepository.save(goods);
+
+
     }
 
     /**

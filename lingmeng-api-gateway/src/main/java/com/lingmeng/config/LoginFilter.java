@@ -3,14 +3,15 @@ package com.lingmeng.config;
 
 import com.lingmeng.common.config.JwtProperties;
 import com.lingmeng.common.utils.auth.CookieUtils;
+import com.lingmeng.common.utils.auth.JwtUtils;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
-import com.lingmeng.common.utils.auth.JwtUtils;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletRequest;
   * @Description zuul过滤器
   **/
 @Component
+@EnableConfigurationProperties(JwtProperties.class)
 public class LoginFilter extends ZuulFilter {
     private static  final Logger logger = LoggerFactory.getLogger(LoginFilter.class);
 
@@ -28,7 +30,7 @@ public class LoginFilter extends ZuulFilter {
     JwtProperties properties;
 
     @Autowired
-    FilterProperties filterProperties;
+    private FilterProperties filterProperties;
 
     @Override
     public String filterType() {
@@ -59,6 +61,12 @@ public class LoginFilter extends ZuulFilter {
          return flag;
     }
 
+    /**
+     * @author skin
+     * @param
+     * @Date  2021/2/26 14:39
+     * @description  这里过滤器主要用作访问权限控制
+     **/
     @Override
     public Object run() throws ZuulException {
         RequestContext currentContext = RequestContext.getCurrentContext();

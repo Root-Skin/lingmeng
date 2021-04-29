@@ -1,0 +1,175 @@
+server:
+  port: 8083
+spring:
+  jackson:
+    default-property-inclusion: non_null # 配置json处理时忽略空值
+  application:
+    name: lingmeng-manager
+  servlet:
+    multipart:
+      max-file-size: 5MB  #限制上传文件大小
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/lingmeng?serverTimezone=GMT%2B8
+    username: root
+    password: huangtao123456
+    hikari:
+      maximum-pool-size: 30 #最大连接数目
+      minimum-idle: 10  #最大空闲数目
+  mail:
+    username: huangtaosta@163.com
+    password: EFFNOBWEJEBQFVAU
+    host: smtp.163.com
+    protocol: smtp
+    properties.mail.smtp.auth: true
+    properties.mail.smtp.port: 994 #465或者994
+    properties.mail.smtp.starttls.enable: true
+    properties.mail.smtp.starttls.required: true
+    properties.mail.smtp.ssl.enable: true
+    default-encoding: utf-8
+  rabbitmq: #配置mq
+    username: lingmeng
+    password: lingmeng
+    host: 192.168.189.135
+    port: 5672
+    cache:
+      channel:
+        size: 1000
+    listener:
+        simple:
+          acknowledge-mode: manual
+          retry:
+            max-attempts: 3     # 最大重试3次
+            multiplier: 1      # 应用于前一重试间隔的乘法器。
+            enabled: true      # 开始自动重试
+            initial-interval: 1000    # 消息多次消费的间隔1秒
+    publisher-confirm-type: correlated
+  redis:
+    # Redis服务器地址
+    host: 192.168.189.135
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password:
+    timeout: 5000
+    database: 0
+    pool:
+      # 连接池最大连接数（使用负值表示没有限制）
+      max-active: 400
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-wait: -1
+      # 连接池中的最大空闲连接
+      max-idle: 20
+      # 连接池中的最小空闲连接
+      min-idle: 0
+  kafka:
+    bootstrap_servers_config: 192.168.189.135:9092
+    #如果出现发送失败的情况，允许重试的次数
+    retries_config: 0
+    #每个批次发送多大的数据
+    batch_size_config: 4096
+    #定时发送，达到1ms发送
+    linger_ms_config: 1
+    #缓存的大小
+    buffer_memory_config: 40960
+    #TOPIC的名字
+    topic: test
+mybatis-plus:                #配置mybatis的映射包
+  mapper-locations: classpath*:com/lingmeng/dao/**/xml/*Mapper.xml
+  typeAliasesPackage: com.lingmeng.model.*.model
+  configuration:
+    map-underscore-to-camel-case: true  #开启user_name 对应userName驼峰命名法
+    cache-enabled: true
+  type-enums-package: com.lingmeng.testEnum
+  configuration.default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
+jwt:
+  secret: lingmengSecret
+  pubKeyPath: D:\\tem_key\\rsa.pub
+  priKeyPath: D:\\tem_key\\rsa.pri
+  expire: 30
+  cookieName: LM_TOKEN
+  cookieMaxAge: 30
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+  instance:
+    prefer-ip-address: true #表示不使用主机名来定义 而是使用IP
+    ip-address: 127.0.0.1  #ip
+    instance-id: ${spring.application.name}:${server.port}
+    lease-renewal-interval-in-seconds: 2 #5s发送一次心跳
+    lease-expiration-duration-in-seconds: 20 #10s不发送就过期
+ribbon:
+    listOfServers: http://localhost:8090
+fdfs:
+  so-timeout: 1501
+  connect-timeout: 601
+  thumb-image: # 缩略图
+    width: 60
+    height: 60
+  tracker-list: # tracker地址
+    - 192.168.189.135:22122
+logging:
+  level:
+    com.lingmeng.dao: debug
+wx:
+  appId: wx35eeb7862fcd0a54
+  appSecret: ca40d44f6b298580cc1c23b862575b3f
+  mchId: 1509699451
+  key: saduashfdoiasfhoasihfoasihfoashf
+alipay:
+  gateWay: openapi.alipaydev.com
+  signType: RSA2
+  charset: utf-8
+  appId: 2021000116685367
+  privateKey: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDHuxY99sUN1po4SkKjyL7Qwv3h8bfeSMwyCVE9fNFpdqzRP0r+BXAeWf9aDQGyH3QYSWnrpy5Lv/HibYhLp4HFOcee/6pFPvTPbZk4sqwaHj7LbOmtmm3FhbWnPgp4f/Wi68wATORyLEcVO18tdEOoOzGTa+B3DySZJfwUXd/MwKY200KiMr9SPFvUF1pTpagqyIbUwKYcqy9pbf79D79b3CeoiLMaHVO1B0KAUNQfwa4tmJl+5wCMF9TRNUQn37je0O+FbdTkTQh/oYOCUMKRtavPacBLrUStDSvL67XabuzyCq9uHb7dq7nbfOgZPLHwoliNFgyVhTJblo4vbWk3AgMBAAECggEATtalb+4RWGYGWAPQDDB4SZU+e8pbBq37lCCjZb74NkX2712pb12cJQ7nQZdyvOm3fMK1waQrHRF2HCeaLiq/iadGCZfnkQ/JuHsNiRjV4DViGhAyqSkU/WvLCWnu3iO8RQQIcXHolrytjk7yQdHrxuMerY9eegCLNLyOpUdsyLfqzpyrRzQfSiYNGt4IIHi+MykIzOygTvQb1zwM/BRrawFf8Wlf3xSEtQy2d610o1zbvoVG8IrZ6lDhTwodMxqqIwWhnWxR/4baAOgybvWr4fd84j71TNVi5nqq68viSuZGHiboH+DQT0Ma1rBe9jj+b19/MAks72A1Emh/piNXEQKBgQD/WFuqTdeRy+3zdGLN+S/5HF33jXgXuvtjIg+cOSncrKhOmOT/taaY9XVbt315QgIEO/TGhsgD84HOHnYE7diGGZygPbbJH9XeXd+vxsvjJ12JOw09fwj3OnZUiQ8XlWIPS7Rxo9fxOu+2dX/ePQQX2O+4rQWyPtpB20oDIISWGQKBgQDIPjde+TW8f+PqCEC5sSFabTKtYe3d5nUYypdGnBokM6IPcRonOw4Uy+LlL/Zu5cT6GQ44s7jLwe8BRCAOrLbhQAQjtRswgMIpRfb0lfFdQbesNL9lesPpvJiMhZo5mYbkthdR3IL6g2tZkKXoVikE4wCM0fVd4sEaIzOYQ1vDzwKBgQCS1QZxGi4aAsCkPIsMknyJrUxDrDAgxT8FtHJxjVWLNiXafIVCnfxc/NktkogukEyEjs2k06B01TQRiOao0vStuFCevJ49bXcYVbbpZ1GbH+njnfdxI3nOYOnmlqH9F8O5s/jhWCw25YMu0sZiz4dpBzBia+xYoVf0gts+jRZxEQKBgQCbuC5tMBYG2dnOxM442bObU7IGPVKyrqY/OkT8BycZIgIUShtRiM5Bg/CV1H+q7AoLh/KUS8cYxV7tOCJJ5yxs7NCLSCq1xFu5pwwOVpCVuiZwx7BT5W13Vk+3b6powqixMZ3e7kH5OLwBscgjbuWFRFbIK/rJIS6T+e4EqdUx5wKBgCN6ekFbOAy1k+lxoWATnHVYn6mgZwDsOQbiqHF+anosUVtkpYZ5V+oE5Twz/93IsLmSup6TrnDB1scOf633uGwzJMkKa8AeMs+4N+2tFAQXE6wsDyqO9rfOI7hOLDs6tCnXGhk73ppOn68WCPrudo9hNa0FAzsOBRWHTgtEqgAD
+  alipayPublicKey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArxvc5ws6+1WpcBkqOP8Fo7mYZLmwvZ15j50PoLaud8BpPJFspYGDsdqb1CN8uLkNeB3ncbjMqPzRgoLKp8xRZ9iRCoudT+FyXKU0p6L0Su5OAHwi6kXo3Jsa28+p+ketrshFAfqVLHX0suIiq1nPn8dAiyaK958geAMzlxRI8m2oKfnubzfjGmcMEXanajK0a2/7/2QS2CHK/Rf1FayHylENgZRkBEcjUfFGPoihJ5Im49D01ptvD33PqlIzRlLSw80YwjcgSI7s84noU4aDCP+wW/BSitLFuST4SXVG9TNTnIC83HqZtqXauPtPjXdz6QAwbEtGhkFSI9Xv1z+m0wIDAQAB
+  notifyUrl: http://4qm6uq.natappfree.cc/call
+  port: 8083
+crawler:
+    init:
+      url:
+        prefix: https://www.csdn.net/nav/
+        suffix: java,web,arch,db,mobile,ops,sec,cloud,engineering,iot,fund,career
+    help:
+      nextPagingSize: 5
+crux:
+  cookie:
+      name: acw_sc__v2
+proxy:
+  isUsedProxyIp: false
+#  ChromeDriver下载
+webdriver:
+  chrome:
+    driver: D:/myproject/weblogic/chromedriver.exe
+#3D七牛上传
+qiniu:
+  realFaceAccessKey: 7A2Qq9xOwhztEqozbwfrOtzRGPy6NMtFX3B13HoO
+  realFaceSecretKey: p8L4QaGzH5KiIYBLhOfI4vK96eNdJXen_C7VSAKW
+  # 3D模型上传的空间
+  realFaceBucket: realmerit-model-resources
+  # 3D模型访问域名
+  realFaceDomain: models.release.neurongenius.com
+  # 3D模型生成下载链接的协议
+  realFaceProtocol: http
+
+  accessKey: naDNSb-_EB57vRk0_qdPTs1XShTGuzbW4S3ebQ02
+  secretKey: kEeSdeCDgxiYqhfFP5ZFhgdITc3A4zTuCShsH6Jk
+  # 附件上传的空间
+  bucket: neuron-3d
+  # app对应的3D模型上传的空间名称
+  appModelBucket: neuron-app3d
+  # app对应的3D模型访问域名
+  appModelDomain: cdn.3d.neurongenius.com
+  # 附件访问域名
+  domain: cdn.3d.neurongenius.com
+  # 附件生成下载链接的协议
+  protocol: http
+photo:
+    #照片是否上传到七牛空间
+    qiNiuUsed: false
+    #文件访问地址
+    url: http://localhost:${server.port}
+#kafka的服务器地址
+
+

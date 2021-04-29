@@ -13,6 +13,7 @@
         <module>lingmeng-service</module>
         <module>lingmeng-dao</module>
         <module>lingmeng-manager-web</module>
+        <module>lingmeng-distributed</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -38,6 +39,10 @@
         <jsql.version>3.1</jsql.version>
         <mq.version>2.3.1.RELEASE</mq.version>
         <sms.version>4.5.3</sms.version>
+        <scala.version>2.11</scala.version>
+        <flink.version>1.6.1</flink.version>
+        <hadoop.version>2.7.5</hadoop.version>
+        <hbase.version>2.0.0</hbase.version>
     </properties>
 
     <dependencyManagement>
@@ -109,6 +114,15 @@
                 <groupId>com.aliyun</groupId>
                 <artifactId>aliyun-java-sdk-core</artifactId>
             </dependency>
+            <dependency>
+                <groupId>com.github.wxpay</groupId>
+                <artifactId>wxpay-sdk</artifactId>
+                <version>0.0.3</version>
+            </dependency>
+
+            <!--大数据模块-->
+
+
 
         </dependencies>
 
@@ -118,24 +132,42 @@
 
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>local</id>
+            <properties>
+                <!-- 环境标识，需要与配置文件的名称相对应 -->
+                <spring.active>local</spring.active>
+            </properties>
+            <activation>
+                <!-- 默认环境 -->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <spring.active>test</spring.active>
+            </properties>
+        </profile>
+    </profiles>
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.8</source>
+                        <target>1.8</target>
+                    </configuration>
+                </plugin>
+            </plugins>
+
         <resources>
             <resource>
                 <directory>src/main/webapp</directory>
             </resource>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/*</include>
-                </includes>
-            </resource>
+
 
             <resource>
                 <directory>META-INF/resources</directory>
@@ -149,6 +181,22 @@
                 <includes>
                     <include>**/*.xml</include>
                 </includes>
+            </resource>
+            <!--先排除掉所有的application*.properties-->
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>application*.yml</exclude>
+                </excludes>
+            </resource>
+            <!--再将对应配置的properties包含在内-->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>application.yml</include>
+                    <include>application-${spring.active}.yml</include>
+                </includes>
+                <filtering>true</filtering>
             </resource>
         </resources>
     </build>

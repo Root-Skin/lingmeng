@@ -36,6 +36,7 @@ public class RestReturn extends HashMap<String, Object> {
         return result;
     }
 
+
     public static RestReturn ok(Object data) {
         RestReturn result = new RestReturn();
         result.put("code", 10000);
